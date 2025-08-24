@@ -21,24 +21,22 @@ public class CreateClinicalOrder {
     }
 
     public void create(ClinicalOrder clinicalOrder) throws Exception {
-        User doctor = new User();
-        doctor.setNationalId(clinicalOrder.getDoctorId());
-        doctor = userPort.findByDocument(doctor);
-
-        if (doctor == null || doctor.getRole() == null || !doctor.getRole().equalsIgnoreCase("DOCTOR")) {
-            throw new Exception("Las órdenes solo las puede crear un usuario con rol DOCTOR");
+        if (clinicalOrder.getMedic() == null || clinicalOrder.getMedic().getDocument() == null) {
+            throw new Exception("Debe indicar el documento del médico");
         }
-
-        Patient patient = new Patient();
-        patient.searchByName(clinicalOrder.getFullName());
-        patient = patientPort.findByDocument(patient);
-
+        User doctorQuery = new User();
+        if (clinicalOrder.getPatient() == null || clinicalOrder.getPatient().getDocument() == null) {
+            throw new Exception("Debe indicar el documento del paciente");
+        }
+        Patient patientQuery = new Patient();
+        patientQuery.setDocument(clinicalOrder.getPatient().getDocument());
+        Patient patient = patientPort.findByDocument(patientQuery);
         if (patient == null) {
             throw new Exception("La orden debe asociarse a un paciente registrado");
         }
 
-        if (clinicalOrder.getCreatedAt() == null) {
-            clinicalOrder.setCreatedAt(new Date(System.currentTimeMillis()));
+        if (clinicalOrder.getDate() == null) {
+            clinicalOrder.setDate(new Date(System.currentTimeMillis()));
         }
 
         clinicalOrderPort.save(clinicalOrder);
