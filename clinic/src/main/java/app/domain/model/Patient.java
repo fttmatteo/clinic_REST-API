@@ -21,7 +21,7 @@ public class Patient{
     private long companyNumber;
     private boolean status;
     private Date validity;
-    private Role role;
+    private User role;
 
     public long getId() {
         return id;
@@ -159,11 +159,11 @@ public class Patient{
         this.validity = validity;
     }
 
-    public Role getRole() {
+    public User getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(User role) {
         this.role = role;
     }
 }

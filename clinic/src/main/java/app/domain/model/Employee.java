@@ -10,7 +10,7 @@ public class Employee {
     private String phone;
     private Date birthDate;
     private String address;
-    private String role;
+    private User role;
     private String username;
     private String password;
     public Long getId() {
@@ -55,10 +55,10 @@ public class Employee {
     public void setAddress(String address) {
         this.address = address;
     }
-    public String getRole() {
+    public User getRole() {
         return role;
     }
-    public void setRole(String role) {
+    public void setRole(User role) {
         this.role = role;
     }
     public String getUsername() {
