@@ -7,7 +7,7 @@ public class Invoice {
     private Patient name;
     private Patient age;
     private Patient document;
-    private Medic fullName;
+    private Employee fullName;
     private Patient companyName;
     private Patient companyNumber;
     private int validityDays;
@@ -45,11 +45,11 @@ public class Invoice {
         this.document = document;
     }
 
-    public Medic getFullName() {
+    public Employee getFullName() {
         return fullName;
     }
 
-    public void setFullName(Medic fullName) {
+    public void setFullName(Employee fullName) {
         this.fullName = fullName;
     }
 

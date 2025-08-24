@@ -3,11 +3,61 @@ package app.domain.model;
 import java.sql.Date;
 
 public class ClinicalOrder {
+    private long id;
+    private Patient fullName;
+    private User patient;
+    private User medic;
+    private String medicine;
+    private String doce;
     private Date date;
-    private Medic document;
-    private String consultationMotive;
-    private String symptomatology;
-    private String diagnostic;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Patient getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(Patient fullName) {
+        this.fullName = fullName;
+    }
+
+    public User getPatient() {
+        return patient;
+    }
+
+    public void setPatient(User patient) {
+        this.patient = patient;
+    }
+
+    public User getMedic() {
+        return medic;
+    }
+
+    public void setMedic(User medic) {
+        this.medic = medic;
+    }
+
+    public String getMedicine() {
+        return medicine;
+    }
+
+    public void setMedicine(String medicine) {
+        this.medicine = medicine;
+    }
+
+    public String getDoce() {
+        return doce;
+    }
+
+    public void setDoce(String doce) {
+        this.doce = doce;
+    }
 
     public Date getDate() {
         return date;
@@ -15,37 +65,5 @@ public class ClinicalOrder {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Medic getDocument() {
-        return document;
-    }
-
-    public void setDocument(Medic document) {
-        this.document = document;
-    }
-
-    public String getConsultationMotive() {
-        return consultationMotive;
-    }
-
-    public void setConsultationMotive(String consultationMotive) {
-        this.consultationMotive = consultationMotive;
-    }
-
-    public String getSymptomatology() {
-        return symptomatology;
-    }
-
-    public void setSymptomatology(String symptomatology) {
-        this.symptomatology = symptomatology;
-    }
-
-    public String getDiagnostic() {
-        return diagnostic;
-    }
-
-    public void setDiagnostic(String diagnostic) {
-        this.diagnostic = diagnostic;
     }
 }
