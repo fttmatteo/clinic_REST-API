@@ -1,7 +1,5 @@
 package app.domain.model;
 
-import java.sql.Date;
-
 public class Invoice {
     private long id;
     private Patient name;
