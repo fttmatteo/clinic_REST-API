@@ -9,11 +9,10 @@ public class CreateEmployee {
 
 	public void create(Employee employee) throws Exception {
 		if (employeePort.findByDocument(employee) != null) {
-			throw new Exception("ya existe una persona registrada con esa cedula");
+			throw new Exception("Ya existe una persona registrada con esa cedula");
 		}
-
 		if (employeePort.findByUserName(employee) != null) {
-			throw new Exception("ya existe una persona registrada con ese nombre de usuario");
+			throw new Exception("Ya existe una persona registrada con ese nombre de usuario");
 		}
 		employeePort.save(employee);
 	}
