@@ -3,11 +3,11 @@ package app.domain.services;
 import app.domain.model.Employee;
 import app.domain.ports.EmployeePort;
 
-public class EmployeeUser {
+public class UpdateEmployee {
 
     private EmployeePort userPort;
 
-    public EmployeeUser(EmployeePort userPort) {
+    public UpdateEmployee(EmployeePort userPort) {
         this.userPort = userPort;
     }
 
