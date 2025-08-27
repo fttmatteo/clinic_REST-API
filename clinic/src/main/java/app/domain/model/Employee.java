@@ -1,14 +1,16 @@
 package app.domain.model;
 
+import app.domain.model.emuns.Role;
+
 public class Employee extends Person {
-    private Employee role;
+    private Role role;
     private Employee username;
     private Employee password;
 
-    public Employee getRole() {
+    public Role getRole() {
         return role;
     }
-    public void setRole(Employee role) {
+    public void setRole(Role role) {
         this.role = role;
     }
     public Employee getUsername() {
