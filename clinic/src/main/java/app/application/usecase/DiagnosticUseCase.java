@@ -14,7 +14,7 @@ public class DiagnosticUseCase {
         diagnosticPort.save(diagnostic);
     }
 
-    public Diagnostic findDiagnosticById(Long id) throws Exception {
-        return diagnosticPort.findById(id);
+    public Diagnostic findDiagnosticById(Diagnostic diagnostic) throws Exception {
+        return diagnosticPort.findById(diagnostic);
     }
 }
