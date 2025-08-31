@@ -16,5 +16,6 @@ public class DiagnosticUseCase {
 
     public Diagnostic findDiagnosticById(Diagnostic diagnostic) throws Exception {
         return diagnosticPort.findById(diagnostic);
+
     }
 }

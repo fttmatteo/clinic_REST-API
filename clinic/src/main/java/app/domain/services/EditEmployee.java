@@ -14,7 +14,9 @@ public class EditEmployee {
         if (employee == null) {
             throw new Exception("El objeto empleado es nulo");
         }
+
         if (employee.getUserName() == null || employee.getUserName().isEmpty()) {
+
             throw new Exception("El nombre del empleado es obligatorio");
         }
         if (employee.getEmail() == null || employee.getEmail().isEmpty()) {
@@ -25,6 +27,7 @@ public class EditEmployee {
         if (existingEmployee == null) {
             throw new Exception("El empleado no existe");
         }
+
 
         existingEmployee.setUserName(employee.getUserName());
         existingEmployee.setEmail(employee.getEmail());
