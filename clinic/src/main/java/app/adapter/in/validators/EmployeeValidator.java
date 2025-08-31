@@ -1,7 +1,7 @@
 package app.adapter.in.validators;
 
 public class EmployeeValidator extends SimpleValidator {
-    
+
     public String nameValidator(String value) throws Exception {
 		return stringValidator("nombre de la persona", value);
 	}
@@ -14,8 +14,8 @@ public class EmployeeValidator extends SimpleValidator {
 		return stringValidator("contraseña", value);
 	}
 	
-	public long documentValidator(String value) throws Exception {
-		return longValidator("el documento de la persona", value);
+	public int documentValidator(String value) throws Exception {
+		return integerValidator("el documento de la persona", value);
 	}
 	
 	public int ageValidator(String value) throws Exception {
