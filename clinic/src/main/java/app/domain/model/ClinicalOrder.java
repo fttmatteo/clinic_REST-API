@@ -4,14 +4,10 @@ import java.sql.Date;
 
 public class ClinicalOrder {
     private int id;
-    private Patient fullName;
-    private Employee patient;
-    private Employee doctor;
-    private String medicine;
-    private int doce;
-    private Date date;
-
-    public long getId() {
+    private int patientDocument;
+    private int doctorDocument;
+    private Date dateCreation;
+    public int getId() {
         return id;
     }
 
@@ -19,51 +15,27 @@ public class ClinicalOrder {
         this.id = id;
     }
 
-    public Patient getFullName() {
-        return fullName;
+    public int getPatientDocument() {
+        return patientDocument;
     }
 
-    public void setFullName(Patient fullName) {
-        this.fullName = fullName;
+    public void setPatientDocument(int patientDocument) {
+        this.patientDocument = patientDocument;
     }
 
-    public Employee getPatient() {
-        return patient;
+    public int getDoctorDocument() {
+        return doctorDocument;
     }
 
-    public void setPatient(Employee patient) {
-        this.patient = patient;
+    public void setDoctorDocument(int doctorDocument) {
+        this.doctorDocument = doctorDocument;
     }
 
-    public Employee getMedic() {
-        return doctor;
+    public Date getDateCreation() {
+        return dateCreation;
     }
 
-    public void setMedic(Employee medic) {
-        this.doctor = medic;
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
     }
-
-    public String getMedicine() {
-        return medicine;
     }
-
-    public void setMedicine(String medicine) {
-        this.medicine = medicine;
-    }
-
-    public int getDoce() {
-        return doce;
-    }
-
-    public void setDoce(int doce) {
-        this.doce = doce;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-}
