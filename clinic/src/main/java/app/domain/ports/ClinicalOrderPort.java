@@ -1,7 +1,6 @@
 package app.domain.ports;
 
 import java.util.List;
-
 import app.domain.model.ClinicalOrder;
 
 public interface ClinicalOrderPort {
