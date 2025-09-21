@@ -1,8 +1,8 @@
 package app.domain.ports;
 
-import app.domain.model.Diagnostic;
+import app.domain.model.DiagnosticAid;
 
 public interface DiagnosticPort {
-    Diagnostic findById(Diagnostic diagnostic) throws Exception;
-    void save(Diagnostic diagnostic) throws Exception;
+    DiagnosticAid findById(DiagnosticAid diagnostic) throws Exception;
+    void save(DiagnosticAid diagnostic) throws Exception;
 }

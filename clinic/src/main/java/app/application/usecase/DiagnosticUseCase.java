@@ -1,6 +1,6 @@
 package app.application.usecase;
 
-import app.domain.model.Diagnostic;
+import app.domain.model.DiagnosticAid;
 import app.domain.ports.DiagnosticPort;
 
 public class DiagnosticUseCase {
@@ -10,11 +10,11 @@ public class DiagnosticUseCase {
         this.diagnosticPort = diagnosticPort;
     }
 
-    public void saveDiagnostic(Diagnostic diagnostic) throws Exception {
+    public void saveDiagnostic(DiagnosticAid diagnostic) throws Exception {
         diagnosticPort.save(diagnostic);
     }
 
-    public Diagnostic findDiagnosticById(Diagnostic diagnostic) throws Exception {
+    public DiagnosticAid findDiagnosticById(DiagnosticAid diagnostic) throws Exception {
         return diagnosticPort.findById(diagnostic);
 
     }
