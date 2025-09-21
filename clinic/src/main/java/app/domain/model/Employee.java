@@ -2,11 +2,53 @@ package app.domain.model;
 
 import app.domain.model.emuns.Role;
 
-public class Employee extends Person {
+public class Employee {
+    private String fullName;
+    private int document;
+    private String email;
+    private int phoneNumber;
+    private String birthDate;
+    private String address;
     private Role role;
     private String username;
     private String password;
 
+    public String getFullName() {
+        return fullName;
+    }
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+    public int getDocument() {
+        return document;
+    }
+    public void setDocument(int document) {
+        this.document = document;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    public String getBirthDate() {
+        return birthDate;
+    }
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }    
     public Role getRole() {
         return role;
     }
