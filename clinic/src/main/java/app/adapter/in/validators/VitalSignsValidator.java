@@ -20,8 +20,8 @@ public class VitalSignsValidator extends SimpleValidator {
         return bloodPressureValidator(value);
     }
 
-    public double temperatureValidator(String value) throws Exception {
-        return rangeDouble("temperatura", value, 30.0, 45.0);
+    public float temperatureValidator(String value) throws Exception {
+        return rangeFloat("temperatura", value, 30f, 45f);
     }
 
     public int pulseValidator(String value) throws Exception {
