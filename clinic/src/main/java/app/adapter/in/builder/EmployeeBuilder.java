@@ -1,20 +1,37 @@
 package app.adapter.in.builder;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import app.adapter.in.validators.EmployeeValidator;
 import app.domain.model.Employee;
 
-
+@Component
 public class EmployeeBuilder {
 
-    private EmployeeValidator EmployeeValidator;
-	
-	
-	public Employee build(String name, String document, String age, String userName, String password) throws Exception {
-		Employee employee = new Employee();
-		employee.setFullName(EmployeeValidator.nameValidator(name));
-		employee.setDocument(EmployeeValidator.documentValidator(document));
-		employee.setUserName(EmployeeValidator.userNameValidator(userName));
-		employee.setPassword(EmployeeValidator.passwordValidator(password));
-		return employee;
-	}
+    @Autowired
+    private EmployeeValidator validator;
+
+    public Employee build(
+        String fullName,
+        String document,
+        String email,
+        String phoneNumber,
+        String birthDate,
+        String address,
+        String username,
+        String password
+    ) throws Exception {
+
+        Employee employee = new Employee();
+        employee.setFullName(validator.fullNameValidator(fullName));
+        employee.setDocument(validator.documentValidator(document));
+        employee.setEmail(validator.emailValidatorField(email));
+        employee.setPhoneNumber(validator.phoneNumberValidator(phoneNumber));
+        employee.setBirthDate(validator.birthDateValidator(birthDate));
+        employee.setAddress(validator.addressValidator(address));
+        employee.setUserName(validator.usernameValidator(username));
+        employee.setPassword(validator.passwordValidator(password));
+        return employee;
+    }
 }
