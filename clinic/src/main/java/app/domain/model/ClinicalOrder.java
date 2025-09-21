@@ -3,16 +3,16 @@ package app.domain.model;
 import java.sql.Date;
 
 public class ClinicalOrder {
-    private int id;
+    private int numberOrder;
     private int patientDocument;
     private int doctorDocument;
     private Date dateCreation;
     public int getId() {
-        return id;
+        return numberOrder;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.numberOrder = id;
     }
 
     public int getPatientDocument() {
