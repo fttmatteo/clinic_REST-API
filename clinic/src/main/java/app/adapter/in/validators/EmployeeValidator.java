@@ -42,7 +42,6 @@ public class EmployeeValidator extends SimpleValidator {
     }
 
     public String roleValidator(String value) throws Exception {
-        // Validación básica de no vacío; la conversión a enum va en el mapeo
         return maxLength("rol", value, 30);
     }
 }
