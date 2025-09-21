@@ -2,7 +2,6 @@ package app.adapter.in.validators;
 
 import java.sql.Date;
 import java.util.regex.Pattern;
-
 import app.application.exceptions.InputsException;
 
 public abstract class SimpleValidator {
@@ -32,14 +31,11 @@ public abstract class SimpleValidator {
         }
     }
 
-    public double doubleValidator(String element, String value) throws Exception {
-        stringValidator(element, value);
-        try {
-            return Double.parseDouble(value);
-        } catch (Exception e) {
-            throw new InputsException(element + " debe ser un número numérico");
-        }
-    }
+    public float floatValidator(String element, String value) throws Exception {
+  		stringValidator(element, value);
+  		try { return Float.parseFloat(value); }
+  		catch (Exception e) { throw new InputsException(element + " debe ser un número (float)"); }
+	}
 
     public boolean booleanValidator(String element, String value) throws Exception {
         stringValidator(element, value);
@@ -108,11 +104,9 @@ public abstract class SimpleValidator {
         return n;
     }
 
-    public double rangeDouble(String element, String value, double min, double max) throws Exception {
-        double n = doubleValidator(element, value);
-        if (n < min || n > max) {
-            throw new InputsException(element + " debe estar entre " + min + " y " + max);
-        }
-        return n;
-    }
+    public float rangeFloat(String element, String value, float min, float max) throws Exception {
+  		float n = floatValidator(element, value);
+  		if (n < min || n > max) throw new InputsException(element + " debe estar entre " + min + " y " + max);
+  		return n;
+	}
 }
