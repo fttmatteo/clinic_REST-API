@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import app.application.usecase.EmployeeUseCase;
 import app.adapter.in.builder.EmployeeBuilder;
+import app.adapter.in.rest.request.EmployeeRequest;
 import app.domain.model.Employee;
 import app.domain.services.DeleteEmployee;
 import app.application.exceptions.InputsException;
@@ -20,19 +21,13 @@ public class EmployeeController {
     @Autowired private DeleteEmployee deleteEmployee;
 
     @PostMapping("/employees/doctor")
-    public ResponseEntity<?> createDoctor(
-            @RequestParam String fullName,
-            @RequestParam String document,
-            @RequestParam String email,
-            @RequestParam String phoneNumber,
-            @RequestParam String birthDate,   // yyyy-MM-dd
-            @RequestParam String address,
-            @RequestParam String username,
-            @RequestParam String password
-    ) {
+    public ResponseEntity<?> createDoctor(@RequestBody EmployeeRequest req) {
         try {
-            Employee employee = employeeBuilder.build(fullName, document, email, phoneNumber, birthDate, address, username, password);
-            employeeUseCase.createDoctor(employee) ;
+            Employee e = employeeBuilder.build(
+                req.getFullName(), req.getDocument(), req.getEmail(), req.getPhoneNumber(),
+                req.getBirthDate(), req.getAddress(), req.getUsername(), req.getPassword()
+            );
+            employeeUseCase.createDoctor(e);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
@@ -44,19 +39,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/nurse")
-    public ResponseEntity<?> createNurse(
-            @RequestParam String fullName,
-            @RequestParam String document,
-            @RequestParam String email,
-            @RequestParam String phoneNumber,
-            @RequestParam String birthDate,
-            @RequestParam String address,
-            @RequestParam String username,
-            @RequestParam String password
-    ) {
+    public ResponseEntity<?> createNurse(@RequestBody EmployeeRequest req) {
         try {
-            Employee employee = employeeBuilder.build(fullName, document, email, phoneNumber, birthDate, address, username, password);
-            employeeUseCase.createNurse(employee);
+            Employee e = employeeBuilder.build(
+                req.getFullName(), req.getDocument(), req.getEmail(), req.getPhoneNumber(),
+                req.getBirthDate(), req.getAddress(), req.getUsername(), req.getPassword()
+            );
+            employeeUseCase.createNurse(e);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
@@ -68,19 +57,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/administrative")
-    public ResponseEntity<?> createAdministrative(
-            @RequestParam String fullName,
-            @RequestParam String document,
-            @RequestParam String email,
-            @RequestParam String phoneNumber,
-            @RequestParam String birthDate,
-            @RequestParam String address,
-            @RequestParam String username,
-            @RequestParam String password
-    ) {
+    public ResponseEntity<?> createAdministrative(@RequestBody EmployeeRequest req) {
         try {
-            Employee employee = employeeBuilder.build(fullName, document, email, phoneNumber, birthDate, address, username, password);
-            employeeUseCase.createAdministrative(employee);
+            Employee e = employeeBuilder.build(
+                req.getFullName(), req.getDocument(), req.getEmail(), req.getPhoneNumber(),
+                req.getBirthDate(), req.getAddress(), req.getUsername(), req.getPassword()
+            );
+            employeeUseCase.createAdministrative(e);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
@@ -92,19 +75,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/human-resources")
-    public ResponseEntity<?> createHumanResources(
-            @RequestParam String fullName,
-            @RequestParam String document,
-            @RequestParam String email,
-            @RequestParam String phoneNumber,
-            @RequestParam String birthDate,
-            @RequestParam String address,
-            @RequestParam String username,
-            @RequestParam String password
-    ) {
+    public ResponseEntity<?> createHumanResources(@RequestBody EmployeeRequest req) {
         try {
-            Employee employee = employeeBuilder.build(fullName, document, email, phoneNumber, birthDate, address, username, password);
-            employeeUseCase.createHR(employee);
+            Employee e = employeeBuilder.build(
+                req.getFullName(), req.getDocument(), req.getEmail(), req.getPhoneNumber(),
+                req.getBirthDate(), req.getAddress(), req.getUsername(), req.getPassword()
+            );
+            employeeUseCase.createHR(e);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
@@ -116,19 +93,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/employees/information-support")
-    public ResponseEntity<?> createInformationSupport(
-            @RequestParam String fullName,
-            @RequestParam String document,
-            @RequestParam String email,
-            @RequestParam String phoneNumber,
-            @RequestParam String birthDate,
-            @RequestParam String address,
-            @RequestParam String username,
-            @RequestParam String password
-    ) {
+    public ResponseEntity<?> createInformationSupport(@RequestBody EmployeeRequest req) {
         try {
-            Employee employee = employeeBuilder.build(fullName, document, email, phoneNumber, birthDate, address, username, password);
-            employeeUseCase.createIS(employee);
+            Employee e = employeeBuilder.build(
+                req.getFullName(), req.getDocument(), req.getEmail(), req.getPhoneNumber(),
+                req.getBirthDate(), req.getAddress(), req.getUsername(), req.getPassword()
+            );
+            employeeUseCase.createIS(e);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());

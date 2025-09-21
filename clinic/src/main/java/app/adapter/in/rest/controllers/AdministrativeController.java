@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import app.application.usecase.AdministrativeUseCase;
 import app.adapter.in.builder.PatientBuilder;
 import app.adapter.in.builder.MedicalInsuranceBuilder;
+import app.adapter.in.rest.request.PatientRequest;
+import app.adapter.in.rest.request.InsuranceRequest;
 import app.domain.model.Patient;
 import app.domain.model.MedicalInsurance;
 import app.application.exceptions.InputsException;
@@ -21,25 +23,15 @@ public class AdministrativeController {
     @Autowired private MedicalInsuranceBuilder medicalInsuranceBuilder;
 
     @PostMapping("/patients")
-    public ResponseEntity<?> registerPatient(
-            @RequestParam String document,
-            @RequestParam String fullName,
-            @RequestParam String birthDate,
-            @RequestParam String gender,
-            @RequestParam String address,
-            @RequestParam String phoneNumber,
-            @RequestParam String email,
-            @RequestParam String emergencyFirstName,
-            @RequestParam String emergencyLastName,
-            @RequestParam String relationShip,
-            @RequestParam String emergencyPhone
-    ) {
+    public ResponseEntity<?> registerPatient(@RequestBody PatientRequest req) {
         try {
-            Patient patient = patientBuilder.build(
-                document, fullName, birthDate, gender, address, phoneNumber, email,
-                emergencyFirstName, emergencyLastName, relationShip, emergencyPhone, null
+            Patient p = patientBuilder.build(
+                req.getDocument(), req.getFullName(), req.getBirthDate(), req.getGender(),
+                req.getAddress(), req.getPhoneNumber(), req.getEmail(),
+                req.getEmergencyFirstName(), req.getEmergencyLastName(),
+                req.getRelationShip(), req.getEmergencyPhone(), null
             );
-            administrativeUseCase.registerPatient(patient);
+            administrativeUseCase.registerPatient(p);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
@@ -51,18 +43,12 @@ public class AdministrativeController {
     }
 
     @PostMapping("/patients/{document}/insurance")
-    public ResponseEntity<?> assignInsurance(
-            @PathVariable int document,
-            @RequestParam String companyName,
-            @RequestParam String numberPolicy,
-            @RequestParam String statusPolicy,
-            @RequestParam String endDatePolicy
-    ) {
+    public ResponseEntity<?> assignInsurance(@PathVariable int document, @RequestBody InsuranceRequest req) {
         try {
-            MedicalInsurance medicalInsurance = medicalInsuranceBuilder.build(
-                companyName, numberPolicy, statusPolicy, endDatePolicy
+            MedicalInsurance mi = medicalInsuranceBuilder.build(
+                req.getCompanyName(), req.getNumberPolicy(), req.getStatusPolicy(), req.getEndDatePolicy()
             );
-            administrativeUseCase.assignInsurance(document, medicalInsurance);
+            administrativeUseCase.assignInsurance(document, mi);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());

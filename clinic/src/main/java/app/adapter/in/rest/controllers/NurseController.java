@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import app.application.usecase.NurseUseCase;
 import app.adapter.in.builder.VitalSignsBuilder;
+import app.adapter.in.rest.request.VitalSignsRequest;
 import app.domain.model.VitalSigns;
 import app.application.exceptions.InputsException;
 import app.application.exceptions.BusinessException;
@@ -20,19 +21,13 @@ public class NurseController {
     @Autowired private VitalSignsBuilder vitalSignsBuilder;
 
     @PostMapping("/vital-signs")
-    public ResponseEntity<?> recordVitalSigns(
-            @RequestParam String patientDocument,
-            @RequestParam String date,               
-            @RequestParam String bloodPressure,    
-            @RequestParam String temperature,       
-            @RequestParam String pulse,          
-            @RequestParam String oxygenSaturation  
-    ) {
+    public ResponseEntity<?> recordVitalSigns(@RequestBody VitalSignsRequest req) {
         try {
-            VitalSigns vitalSigns = vitalSignsBuilder.build(
-                patientDocument, date, bloodPressure, temperature, pulse, oxygenSaturation
+            VitalSigns v = vitalSignsBuilder.build(
+                req.getPatientDocument(), req.getDate(), req.getBloodPressure(),
+                req.getTemperature(), req.getPulse(), req.getOxygenSaturation()
             );
-            nurseUseCase.recordVitalSigns(vitalSigns);
+            nurseUseCase.recordVitalSigns(v);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());

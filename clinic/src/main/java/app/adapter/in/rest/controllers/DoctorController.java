@@ -13,6 +13,12 @@ import app.adapter.in.builder.OrderProcedureItemBuilder;
 import app.adapter.in.builder.OrderDiagnosticAidItemBuilder;
 import app.adapter.in.builder.ClinicalHistoryBuilder;
 
+import app.adapter.in.rest.request.ClinicalOrderRequest;
+import app.adapter.in.rest.request.OrderMedicationItemRequest;
+import app.adapter.in.rest.request.OrderProcedureItemRequest;
+import app.adapter.in.rest.request.OrderDiagnosticAidItemRequest;
+import app.adapter.in.rest.request.ClinicalHistoryRequest;
+
 import app.domain.model.ClinicalOrder;
 import app.domain.model.OrderMedicationItem;
 import app.domain.model.OrderProcedureItem;
@@ -33,15 +39,12 @@ public class DoctorController {
     @Autowired private ClinicalHistoryBuilder clinicalHistoryBuilder;
 
     @PostMapping("/orders")
-    public ResponseEntity<?> createOrder(
-            @RequestParam String numberOrder,
-            @RequestParam String patientDocument,
-            @RequestParam String doctorDocuemnt,
-            @RequestParam String creationDate   
-    ) {
+    public ResponseEntity<?> createOrder(@RequestBody ClinicalOrderRequest req) {
         try {
-            ClinicalOrder clinicalOrder = clinicalOrderBuilder.build(numberOrder, patientDocument, doctorDocuemnt, creationDate);
-            doctorUseCase.createOrder(clinicalOrder);
+            ClinicalOrder order = clinicalOrderBuilder.build(
+                req.getNumberOrder(), req.getPatientDocument(), req.getProfessionalDocument(), req.getCreationDate()
+            );
+            doctorUseCase.createOrder(order);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
@@ -53,17 +56,13 @@ public class DoctorController {
     }
 
     @PostMapping("/orders/medications")
-    public ResponseEntity<?> addMedicationItem(
-            @RequestParam String numberOrder,
-            @RequestParam String item,
-            @RequestParam String idMedication,
-            @RequestParam String dose,
-            @RequestParam String treatmentDuration,
-            @RequestParam String price
-    ) {
+    public ResponseEntity<?> addMedicationItem(@RequestBody OrderMedicationItemRequest req) {
         try {
-            OrderMedicationItem orderMedicationItem = orderMedicationItemBuilder.build(numberOrder, item, idMedication, dose, treatmentDuration, price);
-            doctorUseCase.addMedicationItem(orderMedicationItem);
+            OrderMedicationItem it = orderMedicationItemBuilder.build(
+                req.getNumberOrder(), req.getItem(), req.getIdMedication(),
+                req.getDose(), req.getTreatmentDuration(), req.getCost()
+            );
+            doctorUseCase.addMedicationItem(it);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
@@ -75,21 +74,15 @@ public class DoctorController {
     }
 
     @PostMapping("/orders/procedures")
-    public ResponseEntity<?> addProcedureItem(
-            @RequestParam String numberOrder,
-            @RequestParam String item,
-            @RequestParam String idProcedure,
-            @RequestParam String quantity,
-            @RequestParam String frequency,
-            @RequestParam String specialistRequired,  
-            @RequestParam String specialistTypeId,  
-            @RequestParam String price
-    ) {
+    public ResponseEntity<?> addProcedureItem(@RequestBody OrderProcedureItemRequest req) {
         try {
-            OrderProcedureItem orderProcedureItem = orderProcedureItemBuilder.build(
-                numberOrder, item, idProcedure, quantity, frequency, specialistRequired, specialistTypeId, price
+            OrderProcedureItem it = orderProcedureItemBuilder.build(
+                req.getNumberOrder(), req.getItem(), req.getIdProcedure(),
+                req.getQuantity(), req.getFrequency(),
+                req.getSpecialistRequired(), req.getSpecialistTypeId(),
+                req.getCost()
             );
-            doctorUseCase.addProcedureItem(orderProcedureItem);
+            doctorUseCase.addProcedureItem(it);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
@@ -101,20 +94,14 @@ public class DoctorController {
     }
 
     @PostMapping("/orders/diagnostics")
-    public ResponseEntity<?> addDiagnosticAidItem(
-            @RequestParam String numberOrder,
-            @RequestParam String item,
-            @RequestParam String idDiagnosticAid,
-            @RequestParam String quantity,
-            @RequestParam String specialistRequired,
-            @RequestParam String specialistTypeId,
-            @RequestParam String price
-    ) {
+    public ResponseEntity<?> addDiagnosticAidItem(@RequestBody OrderDiagnosticAidItemRequest req) {
         try {
-            OrderDiagnosticAidItem orderDiagnosticAidItem = orderDiagnosticAidItemBuilder.build(
-                numberOrder, item, idDiagnosticAid, quantity, specialistRequired, specialistTypeId, price
+            OrderDiagnosticAidItem it = orderDiagnosticAidItemBuilder.build(
+                req.getNumberOrder(), req.getItem(), req.getIdDiagnosticAid(),
+                req.getQuantity(), req.getSpecialistRequired(),
+                req.getSpecialistTypeId(), req.getCost()
             );
-            doctorUseCase.addDiagnosticAidItem(orderDiagnosticAidItem);
+            doctorUseCase.addDiagnosticAidItem(it);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
@@ -126,19 +113,13 @@ public class DoctorController {
     }
 
     @PostMapping("/clinical-history")
-    public ResponseEntity<?> recordClinicalHistory(
-            @RequestParam String patientDocument,
-            @RequestParam String date,               
-            @RequestParam String doctorDocument,
-            @RequestParam String motive,
-            @RequestParam String symptoms,
-            @RequestParam String diagnosis
-    ) {
+    public ResponseEntity<?> recordClinicalHistory(@RequestBody ClinicalHistoryRequest req) {
         try {
-            ClinicalHistory clinicalHistory = clinicalHistoryBuilder.build(
-                patientDocument, date, doctorDocument, motive, symptoms, diagnosis
+            ClinicalHistory h = clinicalHistoryBuilder.build(
+                req.getPatientDocument(), req.getDate(), req.getProfessionalDocument(),
+                req.getMotive(), req.getSymptoms(), req.getDiagnosis()
             );
-            doctorUseCase.recordClinicalHistory(clinicalHistory);
+            doctorUseCase.recordClinicalHistory(h);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());

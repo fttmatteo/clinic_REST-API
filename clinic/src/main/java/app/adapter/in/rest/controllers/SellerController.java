@@ -1,7 +1,6 @@
 package app.adapter.in.rest.controllers;
 
 import java.util.List;
-import java.sql.Date;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.*;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import app.application.usecase.SellerUseCase;
 import app.adapter.in.builder.InvoiceBuilder;
 import app.adapter.in.validators.InvoiceValidator;
+import app.adapter.in.rest.request.InvoiceRequest;
 import app.domain.model.Invoice;
 import app.domain.model.ClinicalOrder;
 import app.application.exceptions.InputsException;
@@ -24,18 +24,14 @@ public class SellerController {
     @Autowired private InvoiceValidator invoiceValidator;
 
     @PostMapping("/invoices")
-    public ResponseEntity<?> createInvoice(
-            @RequestParam String patientDocument,
-            @RequestParam String doctorName,
-            @RequestParam String serviceDescription,
-            @RequestParam String totalService, 
-            @RequestParam String invoiceDate   
-    ) {
+    public ResponseEntity<?> createInvoice(@RequestBody InvoiceRequest req) {
         try {
-            Invoice invoice = invoiceBuilder.build(patientDocument, doctorName, serviceDescription);
-            long total = invoiceValidator.totalServiceValidator(totalService);
-            Date date = invoiceValidator.invoiceDateValidator(invoiceDate);
-            sellerUseCase.createInvoice(invoice, total, date);
+            Invoice inv = invoiceBuilder.build(
+                req.getPatientDocument(), req.getProfessionalName(), req.getClinicalDetail()
+            );
+            long total = invoiceValidator.totalServiceValidator(req.getTotalService());
+            java.sql.Date date = invoiceValidator.invoiceDateValidator(req.getInvoiceDate());
+            sellerUseCase.createInvoice(inv, total, date);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
