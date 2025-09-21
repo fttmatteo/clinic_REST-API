@@ -21,7 +21,7 @@ public class AdministrativeUseCase {
         registerPatient.create(patient);
     }
 
-    public void assignInsurance(int patientDocument, MedicalInsurance insurance) throws Exception {
-        assignInsurance.assign(patientDocument, insurance);
+    public void assignInsurance(int patientDocument, MedicalInsurance medicalInsurance) throws Exception {
+        assignInsurance.assign(patientDocument, medicalInsurance);
     }
 }
