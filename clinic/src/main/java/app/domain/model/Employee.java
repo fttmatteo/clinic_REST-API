@@ -1,5 +1,7 @@
 package app.domain.model;
 
+import java.sql.Date;
+
 import app.domain.model.emuns.Role;
 
 public class Employee {
@@ -7,7 +9,7 @@ public class Employee {
     private int document;
     private String email;
     private int phoneNumber;
-    private String birthDate;
+    private Date birthDate;
     private String address;
     private Role role;
     private String username;
@@ -37,10 +39,10 @@ public class Employee {
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
     public String getAddress() {

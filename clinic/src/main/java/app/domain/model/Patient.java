@@ -1,9 +1,11 @@
 package app.domain.model;
 
+import java.sql.Date;
+
 public class Patient {
     private int document;
     private String fullName;
-    private String birthDate;
+    private Date birthDate;
     private String gender;
     private String address;
     private int phoneNumber;
@@ -30,11 +32,11 @@ public class Patient {
         this.fullName = fullName;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
