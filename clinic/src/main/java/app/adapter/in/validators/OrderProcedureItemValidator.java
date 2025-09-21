@@ -35,8 +35,8 @@ public class OrderProcedureItemValidator extends SimpleValidator {
         return booleanValidator("requiere especialista", value);
     }
 
-    public String specialistTypeIdValidator(String value) throws Exception {
-        return maxLength("tipo de especialista", value, 40);
+    public int specialistTypeIdValidator(String value) throws Exception {
+        return intValidator("tipo de especialista", value);
     }
 
     public long costValidator(String value) throws Exception {
