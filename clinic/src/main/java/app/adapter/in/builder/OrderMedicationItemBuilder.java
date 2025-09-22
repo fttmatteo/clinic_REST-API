@@ -14,7 +14,7 @@ public class OrderMedicationItemBuilder {
     public OrderMedicationItem build(
         String numberOrder,
         String item,
-        String idMedication,
+        String medicineId,
         String dose,
         String treatmentDuration,
         String price
@@ -23,7 +23,7 @@ public class OrderMedicationItemBuilder {
         OrderMedicationItem orderMedicationItem = new OrderMedicationItem();
         orderMedicationItem.setNumberOrder(validator.numberOrderValidator(numberOrder));
         orderMedicationItem.setItem(validator.itemValidator(item));
-        orderMedicationItem.setIdMedication(validator.idMedicationValidator(idMedication));
+        orderMedicationItem.setMedicineId(validator.idMedicationValidator(medicineId));
         orderMedicationItem.setDose(validator.intValidator("dosis", dose));
         orderMedicationItem.setTreatmentDuration(validator.treatmentDurationValidator(treatmentDuration));
         orderMedicationItem.setPrice(validator.costValidator(price));

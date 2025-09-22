@@ -14,15 +14,15 @@ public class ClinicalOrderBuilder {
     public ClinicalOrder build(
         String numberOrder,
         String patientDocument,
-        String professionalDocument,
+        String doctorDocument,
         String creationDate
     ) throws Exception {
 
         ClinicalOrder clinicalOrder = new ClinicalOrder();
-        clinicalOrder.setId(validator.numberOrderValidator(numberOrder));
+        clinicalOrder.setNumberOrder(validator.numberOrderValidator(numberOrder));
         clinicalOrder.setPatientDocument(validator.patientDocumentValidator(patientDocument));
-        clinicalOrder.setDoctorDocument(validator.professionalDocumentValidator(professionalDocument));
-        clinicalOrder.setDateCreation(validator.creationDateValidator(creationDate));
+        clinicalOrder.setDoctorDocument(validator.professionalDocumentValidator(doctorDocument));
+        clinicalOrder.setCreationDate(validator.creationDateValidator(creationDate));
         return clinicalOrder;
     }
 }

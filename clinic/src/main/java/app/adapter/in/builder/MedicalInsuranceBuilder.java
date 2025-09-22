@@ -20,7 +20,7 @@ public class MedicalInsuranceBuilder {
 
         MedicalInsurance medicalInsurance = new MedicalInsurance();
         medicalInsurance.setCompanyName(validator.companyNameValidator(companyName));
-        medicalInsurance.setNumberPolicy(validator.numberPolicyValidator(numberPolicy)); // long en tu modelo
+        medicalInsurance.setNumberPolicy(validator.numberPolicyValidator(numberPolicy));
         medicalInsurance.setStatusPolicy(validator.statusPolicyValidator(statusPolicy));
         medicalInsurance.setEndDatePolicy(validator.endDatePolicyValidator(endDatePolicy));
         return medicalInsurance;
