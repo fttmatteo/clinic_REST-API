@@ -14,22 +14,22 @@ public class OrderProcedureItemBuilder {
     public OrderProcedureItem build(
         String numberOrder,
         String item,
-        String idProcedure,
+        String procedureId,
         String quantity,
         String frequency,
         String specialistRequired,
-        String specialistTypeId,
+        String specialistId,
         String price
     ) throws Exception {
 
         OrderProcedureItem orderProcedureItem = new OrderProcedureItem();
         orderProcedureItem.setNumberOrder(validator.numberOrderValidator(numberOrder));
         orderProcedureItem.setItem(validator.itemValidator(item));
-        orderProcedureItem.setIdProcedure(validator.idProcedureValidator(idProcedure));
+        orderProcedureItem.setProcedureId(validator.idProcedureValidator(procedureId));
         orderProcedureItem.setQuantity(validator.quantityValidator(quantity));
         orderProcedureItem.setFrequency(validator.frequencyValidator(frequency));
         orderProcedureItem.setSpecialistRequired(validator.specialistRequiredValidator(specialistRequired));
-        orderProcedureItem.setSpecialistTypeId(validator.specialistTypeIdValidator(specialistTypeId));
+        orderProcedureItem.setSpecialistId(validator.specialistTypeIdValidator(specialistId));
         orderProcedureItem.setPrice(validator.costValidator(price));
         return orderProcedureItem;
     }

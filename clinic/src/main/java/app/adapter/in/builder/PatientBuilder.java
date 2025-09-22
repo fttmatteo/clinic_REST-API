@@ -13,7 +13,7 @@ public class PatientBuilder {
     @Autowired private PatientValidator validator;
 
     public Patient build(
-        String document,
+        String patientDocument,
         String fullName,
         String birthDate,
         String gender,
@@ -28,7 +28,7 @@ public class PatientBuilder {
     ) throws Exception {
 
         Patient patient = new Patient();
-        patient.setDocument(validator.documentValidator(document));
+        patient.setPatientDocument(validator.documentValidator(patientDocument));
         patient.setFullName(validator.fullNameValidator(fullName));
         patient.setBirthDate(validator.birthDateValidator(birthDate));
         patient.setGender(validator.genderValidator(gender));

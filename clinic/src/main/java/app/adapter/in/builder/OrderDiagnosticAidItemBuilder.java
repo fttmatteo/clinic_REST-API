@@ -14,20 +14,20 @@ public class OrderDiagnosticAidItemBuilder {
     public OrderDiagnosticAidItem build(
         String numberOrder,
         String item,
-        String idDiagnosticAid,
+        String diagnosticAid,
         String quantity,
         String specialistRequired,
-        String specialistTypeId,
+        String specialistId,
         String price
     ) throws Exception {
 
         OrderDiagnosticAidItem orderDiagnosticAidItem = new OrderDiagnosticAidItem();
         orderDiagnosticAidItem.setNumberOrder(validator.numberOrderValidator(numberOrder));
         orderDiagnosticAidItem.setItem(validator.itemValidator(item));
-        orderDiagnosticAidItem.setIdDiagnosticAid(validator.idDiagnosticAidValidator(idDiagnosticAid));
+        orderDiagnosticAidItem.setDiagnosticAid(validator.idDiagnosticAidValidator(diagnosticAid));
         orderDiagnosticAidItem.setQuantity(validator.quantityValidator(quantity));
         orderDiagnosticAidItem.setSpecialistRequired(validator.specialistRequiredValidator(specialistRequired));
-        orderDiagnosticAidItem.setSpecialistTypeId(validator.specialistTypeIdValidator(specialistTypeId));
+        orderDiagnosticAidItem.setSpecialistId(validator.specialistTypeIdValidator(specialistId));
         orderDiagnosticAidItem.setPrice(validator.costValidator(price));
         return orderDiagnosticAidItem;
     }
