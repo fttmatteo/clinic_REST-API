@@ -2,7 +2,7 @@ package app.domain.model;
 
 import java.sql.Date;
 
-import app.domain.model.emuns.Role;
+import app.domain.model.enums.Role;
 
 public class Employee {
     private String fullName;
