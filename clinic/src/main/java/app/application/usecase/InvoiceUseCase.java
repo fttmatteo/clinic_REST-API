@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import app.domain.model.ClinicalOrder;
 import app.domain.model.Invoice;
 import app.domain.ports.ClinicalOrderPort;
-import app.domain.services.GenerateInvoice;
+import app.domain.services.CreateInvoice;
 
 @Service
-public class SellerUseCase {
+public class InvoiceUseCase {
 
     @Autowired
-    private GenerateInvoice generateInvoice;
+    private CreateInvoice generateInvoice;
 
     @Autowired
     private ClinicalOrderPort clinicalOrderPort;

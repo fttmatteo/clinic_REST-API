@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.http.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import app.application.usecase.SellerUseCase;
+import app.application.usecase.InvoiceUseCase;
 import app.adapter.in.builder.InvoiceBuilder;
 import app.adapter.in.validators.InvoiceValidator;
 import app.adapter.in.rest.request.InvoiceRequest;
@@ -17,9 +17,9 @@ import app.application.exceptions.BusinessException;
 
 @RestController
 @RequestMapping("/api/seller")
-public class SellerController {
+public class InvoiceController {
 
-    @Autowired private SellerUseCase sellerUseCase;
+    @Autowired private InvoiceUseCase sellerUseCase;
     @Autowired private InvoiceBuilder invoiceBuilder;
     @Autowired private InvoiceValidator invoiceValidator;
 
@@ -27,7 +27,7 @@ public class SellerController {
     public ResponseEntity<?> createInvoice(@RequestBody InvoiceRequest req) {
         try {
             Invoice inv = invoiceBuilder.build(
-                req.getPatientDocument(), req.getProfessionalName(), req.getClinicalDetail()
+                req.getPatientDocument(), req.getDoctorName(), req.getServiceDescription()
             );
             long total = invoiceValidator.totalServiceValidator(req.getTotalService());
             java.sql.Date date = invoiceValidator.invoiceDateValidator(req.getInvoiceDate());

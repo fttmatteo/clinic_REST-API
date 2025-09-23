@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class Invoice {
     private long invoiceId;
+    private Date invoiceDate;
     private String patientName;
     private int patientAge;
     private int patientDocument;
@@ -23,6 +24,14 @@ public class Invoice {
 
     public void setInvoiceId(long id) {
         this.invoiceId = id;
+    }
+
+    public Date getInvoiceDate() {
+        return invoiceDate;
+    }
+    
+    public void setInvoiceDate(Date invoiceDate) {
+        this.invoiceDate = invoiceDate;
     }
 
     public String getPatientName() {

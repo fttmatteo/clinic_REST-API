@@ -8,7 +8,7 @@ import app.domain.model.Patient;
 import app.domain.ports.PatientPort;
 
 @Service
-public class RegisterPatient {
+public class CreatePatient {
 
     @Autowired
     private PatientPort patientPort;

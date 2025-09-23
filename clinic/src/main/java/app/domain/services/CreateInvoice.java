@@ -14,7 +14,7 @@ import app.domain.ports.PatientPort;
 import app.application.exceptions.BusinessException;
 
 @Service
-public class GenerateInvoice {
+public class CreateInvoice {
 
     @Autowired private PatientPort patientPort;
     @Autowired private InvoicePort invoicePort;

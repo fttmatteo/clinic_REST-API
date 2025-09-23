@@ -6,13 +6,13 @@ import org.springframework.stereotype.Service;
 import app.domain.model.MedicalInsurance;
 import app.domain.model.Patient;
 import app.domain.services.AssignInsurance;
-import app.domain.services.RegisterPatient;
+import app.domain.services.CreatePatient;
 
 @Service
 public class AdministrativeUseCase {
 
     @Autowired
-    private RegisterPatient registerPatient;
+    private CreatePatient registerPatient;
 
     @Autowired
     private AssignInsurance assignInsurance;

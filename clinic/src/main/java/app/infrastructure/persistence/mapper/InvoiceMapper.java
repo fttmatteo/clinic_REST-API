@@ -28,7 +28,7 @@ public class InvoiceMapper {
     e.setServiceDescription(d.getServiceDescription());
     e.setTotalPatient(d.getTotalPatient());
     e.setCopayment(d.getCopayment());
-    e.setTotalPayable(d.getTotalInsurance());
+    e.setTotalInsurance(d.getTotalInsurance());
     e.setEndDatePolicy(d.getEndDatePolicy());
     return e;
   }

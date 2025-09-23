@@ -33,7 +33,7 @@ public class InvoiceEntity {
   public long getTotalPatient() { return totalPatient; }
   public void setTotalPatient(long totalPatient) { this.totalPatient = totalPatient; }
   public long getTotalInsurance() { return totalInsurance; }
-  public void setTotalPayable(long totalPayable) { this.totalInsurance = totalPayable; }
+  public void setTotalInsurance(long totalInsurance) { this.totalInsurance = totalInsurance; }
   public Date getEndDatePolicy() { return endDatePolicy; }
   public void setEndDatePolicy(Date endDatePolicy) { this.endDatePolicy = endDatePolicy; }
 }
