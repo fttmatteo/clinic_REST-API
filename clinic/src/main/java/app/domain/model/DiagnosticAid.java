@@ -1,15 +1,15 @@
 package app.domain.model;
 
 public class DiagnosticAid {
-    private int diagnosticAidId;
+    private Long diagnosticAidId;
     private String diagnosticAidName;
-    private long price;
+    private Double price;
 
-    public int getDiagnosticAidId() {
+    public Long getDiagnosticAidId() {
         return diagnosticAidId;
     }
 
-    public void setDiagnosticAidId(int diagnosticAidId) {
+    public void setDiagnosticAidId(Long diagnosticAidId) {
         this.diagnosticAidId = diagnosticAidId;
     }
 
@@ -21,11 +21,11 @@ public class DiagnosticAid {
         this.diagnosticAidName = diagnosticAidName;
     }
 
-    public long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
     }

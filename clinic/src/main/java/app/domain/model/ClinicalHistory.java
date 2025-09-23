@@ -3,9 +3,9 @@ package app.domain.model;
 import java.sql.Date;
 
 public class ClinicalHistory {
-    private int patientDocument;
+    private Integer patientDocument;
     private Date attentionDate;
-    private int doctorDocument;
+    private Integer doctorDocument;
     private String motive;
     private String symptoms;
     private String diagnosis;
@@ -57,4 +57,4 @@ public class ClinicalHistory {
     public void setDiagnosis(String diagnosis) {
         this.diagnosis = diagnosis;
     }
-    }
+}

@@ -1,15 +1,15 @@
 package app.domain.model;
 
 public class Procedure {
-    private int procedureId;
+    private Long procedureId;
     private String procedureName;
-    private long price;
+    private Double price;
 
-    public int getProcedureId() {
+    public Long getProcedureId() {
         return procedureId;
     }
 
-    public void setProcedureId(int procedureId) {
+    public void setProcedureId(Long procedureId) {
         this.procedureId = procedureId;
     }
 
@@ -21,11 +21,11 @@ public class Procedure {
         this.procedureName = procedureName;
     }
 
-    public long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 }

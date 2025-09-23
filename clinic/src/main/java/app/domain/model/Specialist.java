@@ -1,14 +1,14 @@
 package app.domain.model;
 
 public class Specialist {
-    private int specialistId;
+    private Long specialistId;
     private String specialistName;
 
-    public int getSpecialistId() {
+    public Long getSpecialistId() {
         return specialistId;
     }
 
-    public void setSpecialistId(int specialistId) {
+    public void setSpecialistId(Long specialistId) {
         this.specialistId = specialistId;
     }
 

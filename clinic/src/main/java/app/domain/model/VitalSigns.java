@@ -3,18 +3,18 @@ package app.domain.model;
 import java.sql.Date;
 
 public class VitalSigns {
-    private int patientDocument;
+    private Integer patientDocument;
     private Date registrationDate;
     private String bloodPressure;
-    private float temperature;
-    private int pulse;
-    private int oxygenSaturation;
+    private Double temperature;
+    private Integer pulse;
+    private Integer oxygenSaturation;
 
-    public int getPatientDocument() {
+    public Integer getPatientDocument() {
         return patientDocument;
     }
 
-    public void setPatientDocument(int patientDocument) {
+    public void setPatientDocument(Integer patientDocument) {
         this.patientDocument = patientDocument;
     }
 
@@ -34,27 +34,27 @@ public class VitalSigns {
         this.bloodPressure = bloodPressure;
     }
 
-    public float getTemperature() {
+    public Double getTemperature() {
         return temperature;
     }
 
-    public void setTemperature(float temperature) {
+    public void setTemperature(Double temperature) {
         this.temperature = temperature;
     }
 
-    public int getPulse() {
+    public Integer getPulse() {
         return pulse;
     }
 
-    public void setPulse(int pulse) {
+    public void setPulse(Integer pulse) {
         this.pulse = pulse;
     }
 
-    public int getOxygenSaturation() {
+    public Integer getOxygenSaturation() {
         return oxygenSaturation;
     }
 
-    public void setOxygenSaturation(int oxygenSaturation) {
+    public void setOxygenSaturation(Integer oxygenSaturation) {
         this.oxygenSaturation = oxygenSaturation;
     }
 }

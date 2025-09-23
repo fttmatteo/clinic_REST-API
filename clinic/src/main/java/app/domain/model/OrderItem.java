@@ -3,17 +3,17 @@ package app.domain.model;
 import app.domain.model.enums.OrderItemType;
 
 public class OrderItem {
-    private Long itemId;                    // Número del ítem en la orden
-    private Long orderId;               // Relación con la orden (ClinicalOrder)
-    private OrderItemType type;         // Tipo de ítem: MEDICINE, PROCEDURE, DIAGNOSTIC_AID
-    private String name;                // Nombre del medicamento, procedimiento o examen
-    private String dose;                // Dosis (solo para medicamentos)
-    private String duration;            // Duración del tratamiento (solo medicamentos)
-    private Integer quantity;           // Cantidad (procedimientos o ayudas diagnósticas)
-    private String frequency;           // Frecuencia (medicamentos/procedimientos)
-    private boolean specialistRequired; // Indica si requiere especialista
-    private String specialistType;      // Tipo de especialista (si aplica)
-    private Double cost;                // Costo del ítem
+    private Long itemId;
+    private Long orderId;
+    private OrderItemType type;
+    private String name;
+    private String dose;
+    private String duration;
+    private Integer quantity;
+    private String frequency;
+    private boolean specialistRequired;
+    private String specialistType;
+    private Double price;
 
     public Long getItemId() {
         return itemId;
@@ -95,12 +95,12 @@ public class OrderItem {
         this.specialistType = specialistType;
     }
 
-    public Double getCost() {
-        return cost;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setCost(Double cost) {
-        this.cost = cost;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
 }

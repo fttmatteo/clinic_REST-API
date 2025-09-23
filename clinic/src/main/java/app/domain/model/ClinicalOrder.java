@@ -3,32 +3,32 @@ package app.domain.model;
 import java.sql.Date;
 
 public class ClinicalOrder {
-    private int numberOrder;
-    private int patientDocument;
-    private int doctorDocument;
+    private Long numberOrder;
+    private Integer patientDocument;
+    private Integer doctorDocument;
     private Date creationDate;
 
-    public int getNumberOrder() {
+    public Long getNumberOrder() {
         return numberOrder;
     }
 
-    public void setNumberOrder(int id) {
-        this.numberOrder = id;
+    public void setNumberOrder(Long numberOrder) {
+        this.numberOrder = numberOrder;
     }
 
-    public int getPatientDocument() {
+    public Integer getPatientDocument() {
         return patientDocument;
     }
 
-    public void setPatientDocument(int patientDocument) {
+    public void setPatientDocument(Integer patientDocument) {
         this.patientDocument = patientDocument;
     }
 
-    public int getDoctorDocument() {
+    public Integer getDoctorDocument() {
         return doctorDocument;
     }
 
-    public void setDoctorDocument(int doctorDocument) {
+    public void setDoctorDocument(Integer doctorDocument) {
         this.doctorDocument = doctorDocument;
     }
 

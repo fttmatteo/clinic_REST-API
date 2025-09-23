@@ -4,9 +4,9 @@ import java.sql.Date;
 
 public class MedicalInsurance {
     private String companyName;
-    private long numberPolicy;
+    private Long numberPolicy;
     private boolean statusPolicy;
-    private int validityDaysPolicy;
+    private Integer validityDaysPolicy;
     private Date endDatePolicy;
 
     public String getCompanyName() {

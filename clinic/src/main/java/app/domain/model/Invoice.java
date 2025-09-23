@@ -3,15 +3,15 @@ package app.domain.model;
 import java.sql.Date;
 
 public class Invoice {
-    private long invoiceId;
+    private Long invoiceId;
     private Date invoiceDate;
     private String patientName;
-    private int patientAge;
-    private int patientDocument;
+    private Integer patientAge;
+    private Integer patientDocument;
     private String doctorName;
     private String companyName;
-    private long numberPolicy;
-    private int validityDaysPolicy;
+    private Long numberPolicy;
+    private Integer validityDaysPolicy;
     private Date endDatePolicy;
     private String serviceDescription;
     private long copayment;
@@ -22,14 +22,14 @@ public class Invoice {
         return invoiceId;
     }
 
-    public void setInvoiceId(long id) {
-        this.invoiceId = id;
+    public void setInvoiceId(long invoiceId) {
+        this.invoiceId = invoiceId;
     }
 
     public Date getInvoiceDate() {
         return invoiceDate;
     }
-    
+
     public void setInvoiceDate(Date invoiceDate) {
         this.invoiceDate = invoiceDate;
     }
@@ -97,6 +97,7 @@ public class Invoice {
     public void setEndDatePolicy(Date endDatePolicy) {
         this.endDatePolicy = endDatePolicy;
     }
+
     public String getServiceDescription() {
         return serviceDescription;
     }

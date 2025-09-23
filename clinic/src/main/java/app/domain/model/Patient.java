@@ -3,12 +3,12 @@ package app.domain.model;
 import java.sql.Date;
 
 public class Patient {
-    private int patientDocument;
+    private Integer patientDocument;
     private String fullName;
     private Date birthDate;
     private String gender;
     private String address;
-    private int phoneNumber;
+    private String phoneNumber;
     private String email;   
     private String emergencyFirstName;
     private String emergencyLastName;
@@ -16,12 +16,12 @@ public class Patient {
     private int emergencyPhone;
     private MedicalInsurance insurancePolicy;
 
-    public int getPatientDocument() {
+    public Integer getPatientDocument() {
         return patientDocument;
     }
 
-    public void setPatientDocument(int document) {
-        this.patientDocument = document;
+    public void setPatientDocument(Integer patientDocument) {
+        this.patientDocument = patientDocument;
     }
 
     public String getFullName() {
@@ -56,11 +56,11 @@ public class Patient {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

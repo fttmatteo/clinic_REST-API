@@ -1,31 +1,31 @@
 package app.domain.model;
 
 public class Medicine {
-   private int medicineId;
+   private Long medicineId;
    private String medicineName;
-   private long price;
+   private Double price;
 
-public int getMedicineId() {
-    return medicineId;
-}
+    public Long getMedicineId() {
+        return medicineId;
+    }
 
-public void setMedicineId(int medicineId) {
-    this.medicineId = medicineId;
-}
+    public void setMedicineId(Long medicineId) {
+        this.medicineId = medicineId;
+    }
 
-public String getMedicineName() {
-    return medicineName;
-}
+    public String getMedicineName() {
+        return medicineName;
+    }
 
-public void setMedicineName(String medicineName) {
-    this.medicineName = medicineName;
-}
+    public void setMedicineName(String medicineName) {
+        this.medicineName = medicineName;
+    }
 
-public long getPrice() {
-    return price;
-}
+    public Double getPrice() {
+        return price;
+    }
 
-public void setPrice(long price) {
-    this.price = price;
-}
+    public void setPrice(Double price) {
+        this.price = price;
+    }
 }
