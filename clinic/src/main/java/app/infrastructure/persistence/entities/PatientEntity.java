@@ -14,7 +14,7 @@ public class PatientEntity {
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long patientId;
 
-  @Column(nullable=false) private int patientDocument;
+  @Column(unique = true) private int patientDocument;
   @Column(nullable=false, length=120) private String fullName;
   @Column(nullable=false) private Date birthDate;
   @Column(length=20) private String gender;
