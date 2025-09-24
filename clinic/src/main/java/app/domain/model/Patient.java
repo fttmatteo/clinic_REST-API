@@ -13,7 +13,7 @@ public class Patient {
     private String emergencyFirstName;
     private String emergencyLastName;
     private String relationShip;
-    private int emergencyPhone;
+    private Integer emergencyPhone;
     private MedicalInsurance insurancePolicy;
 
     public Integer getPatientDocument() {
@@ -96,11 +96,11 @@ public class Patient {
         this.relationShip = relationShip;
     }
 
-    public int getEmergencyPhone() {
+    public Integer getEmergencyPhone() {
         return emergencyPhone;
     }
 
-    public void setEmergencyPhone(int emergencyPhone) {
+    public void setEmergencyPhone(Integer emergencyPhone) {
         this.emergencyPhone = emergencyPhone;
     }
 

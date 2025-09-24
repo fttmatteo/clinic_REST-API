@@ -3,8 +3,8 @@ package app.domain.model;
 import app.domain.model.enums.OrderItemType;
 
 public class OrderItem {
-    private Long itemId;
-    private Long orderId;
+    private Long orderItemId;
+    private Long orderReference;
     private OrderItemType type;
     private String name;
     private String dose;
@@ -15,20 +15,20 @@ public class OrderItem {
     private String specialistType;
     private Double price;
 
-    public Long getItemId() {
-        return itemId;
+    public Long getOrderItemId() {
+        return orderItemId;
     }
 
-    public void setItemId(Long itemId) {
-        this.itemId = itemId;
+    public void setOrderItemId(Long orderItemId) {
+        this.orderItemId = orderItemId;
     }
 
-    public Long getOrderId() {
-        return orderId;
+    public Long getOrderReference() {
+        return orderReference;
     }
 
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+    public void setOrderReference(Long orderReference) {
+        this.orderReference = orderReference;
     }
 
     public OrderItemType getType() {

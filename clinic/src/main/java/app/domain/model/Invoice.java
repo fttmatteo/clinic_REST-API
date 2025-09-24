@@ -14,9 +14,10 @@ public class Invoice {
     private Integer validityDaysPolicy;
     private Date endDatePolicy;
     private String serviceDescription;
-    private long copayment;
-    private long totalPatient;
-    private long totalInsurance;    
+    private String orderReference;
+    private Double copayment;
+    private Double totalPatient;
+    private Double totalInsurance;    
 
     public long getInvoiceId() {
         return invoiceId;
@@ -106,27 +107,35 @@ public class Invoice {
         this.serviceDescription = serviceDescription;
     }
 
-    public long getCopayment() {
+    public String getOrderReference() {
+        return orderReference;
+    }
+
+    public void setOrderReference(String orderReference) {
+        this.orderReference = orderReference;
+    }
+
+    public Double getCopayment() {
         return copayment;
     }
 
-    public void setCopayment(long copayment) {
+    public void setCopayment(Double copayment) {
         this.copayment = copayment;
     }
 
-    public long getTotalPatient() {
+    public Double getTotalPatient() {
         return totalPatient;
     }
 
-    public void setTotalPatient(long totalPatient) {
+    public void setTotalPatient(Double totalPatient) {
         this.totalPatient = totalPatient;
     }
 
-    public long getTotalInsurance() {
+    public Double getTotalInsurance() {
         return totalInsurance;
     }
 
-    public void setTotalInsurance(long totalInsurance) {
+    public void setTotalInsurance(Double totalInsurance) {
         this.totalInsurance = totalInsurance;
     }
     }
