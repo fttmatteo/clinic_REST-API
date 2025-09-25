@@ -33,11 +33,11 @@ public class MedicalInsurance {
         this.statusPolicy = statusPolicy;
     }
 
-    public Integer getValidityDaysPolicy() {
+    public int getValidityDaysPolicy() {
         return validityDaysPolicy;
     }
 
-    public void setValidityDaysPolicy(Integer validityDaysPolicy) {
+    public void setValidityDaysPolicy(int validityDaysPolicy) {
         this.validityDaysPolicy = validityDaysPolicy;
     }
 
