@@ -1,6 +1,6 @@
 package app.domain.model;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Representa la historia clínica de un paciente. Cada registro se compone de
@@ -14,7 +14,12 @@ public class MedicalRecord {
     private long id;
     private Patient patient;
     private Employee doctor;
-    private Date dateTime;
+    /**
+     * Fecha y hora de la consulta (clave de la historia clínica). Se emplea
+     * {@link java.sql.Timestamp} para almacenar tanto la fecha como la hora
+     * exacta del registro y facilitar su almacenamiento en la base de datos.
+     */
+    private Timestamp dateTime;
     private String motive;
     private String symptoms;
     private String diagnosis;
@@ -45,11 +50,11 @@ public class MedicalRecord {
         this.doctor = doctor;
     }
 
-    public Date getDateTime() {
+    public Timestamp getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(Date dateTime) {
+    public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
     }
 

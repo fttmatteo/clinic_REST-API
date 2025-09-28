@@ -10,7 +10,6 @@ public class EmergencyContact {
     private String firstName;
     private String lastName;
     private String relationship;
-    /** Número de teléfono de contacto de emergencia (10 dígitos). */
     private String phone;
 
     public String getFirstName() {
