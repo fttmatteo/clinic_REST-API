@@ -20,10 +20,45 @@ import app.application.usecase.DoctorUseCase;
 /**
  * Cliente de consola para médicos.
  * Permite crear órdenes médicas e historias clínicas y consultar las
- * órdenes asociadas a un paciente. 
+ * órdenes asociadas a un paciente.
  */
 @Controller
 public class DoctorClient {
+
+    /**
+     * Lista de medicamentos de ejemplo para seleccionar rápidamente al crear
+     * ítems de tipo MEDICINE. El usuario puede seleccionar
+     * uno de ellos ingresando el número correspondiente o escribir un
+     * nombre diferente manualmente.
+     */
+    private static final List<String> DEFAULT_MEDICINES = List.of(
+        "Acetaminofén",
+        "Ibuprofeno",
+        "Amoxicilina",
+        "Omeprazol"
+    );
+
+    /**
+     * Lista de procedimientos de ejemplo para selección rápida al crear
+     * ítems de tipo PROCEDURE. Permite elegir entre algunas opciones
+     * sin necesidad de escribir el nombre completo.
+     */
+    private static final List<String> DEFAULT_PROCEDURES = List.of(
+        "Radiografía",
+        "Ultrasonido",
+        "Electrocardiograma"
+    );
+
+    /**
+     * Lista de ayudas diagnósticas de ejemplo para selección rápida al
+     * crear ítems de tipo DIAGNOSTIC_AID. Ofrece varias opciones de
+     * exámenes y pruebas comunes.
+     */
+    private static final List<String> DEFAULT_DIAGNOSTIC_AIDS = List.of(
+        "Hemograma",
+        "Prueba de glucosa",
+        "Análisis de orina"
+    );
 
     private static final String MENU =
         "Ingrese una opción:\n" +
@@ -93,22 +128,30 @@ public class DoctorClient {
         String doctorDocument = reader.nextLine();
         System.out.println("Ingrese el documento del paciente:");
         String patientDocument = reader.nextLine();
-        System.out.println("Ingrese la cantidad de ítems que tendrá la orden:");
-        String countStr = reader.nextLine();
-        int count;
-        try {
-            count = Integer.parseInt(countStr);
-        } catch (NumberFormatException ex) {
-            throw new Exception("La cantidad de ítems debe ser un número entero");
-        }
-        if (count < 1) {
-            throw new Exception("La orden debe contener al menos un ítem");
-        }
-        List<OrderItem> items = new ArrayList<>();
-        for (int i = 1; i <= count; i++) {
-            System.out.println("Ingrese los datos para el ítem #" + i);
-            OrderItem item = readOrderItemData(i);
-            items.add(item);
+
+        System.out.println("¿Desea usar la lista de ítems predeterminada? (si/no):");
+        String useDefault = reader.nextLine();
+        List<OrderItem> items;
+        if (useDefault.equalsIgnoreCase("si") || useDefault.equalsIgnoreCase("s") || useDefault.equalsIgnoreCase("true")) {
+            items = createDefaultOrderItems();
+        } else {
+            System.out.println("Ingrese la cantidad de ítems que tendrá la orden:");
+            String countStr = reader.nextLine();
+            int count;
+            try {
+                count = Integer.parseInt(countStr);
+            } catch (NumberFormatException ex) {
+                throw new Exception("La cantidad de ítems debe ser un número entero");
+            }
+            if (count < 1) {
+                throw new Exception("La orden debe contener al menos un ítem");
+            }
+            items = new ArrayList<>();
+            for (int i = 1; i <= count; i++) {
+                System.out.println("Ingrese los datos para el ítem #" + i);
+                OrderItem item = readOrderItemData(i);
+                items.add(item);
+            }
         }
         return orderBuilder.build(id, doctorDocument, patientDocument, items);
     }
@@ -118,15 +161,66 @@ public class DoctorClient {
         String itemNumber = reader.nextLine();
         System.out.println("Tipo de ítem (MEDICINE, PROCEDURE, DIAGNOSTIC_AID):");
         String type = reader.nextLine();
-        System.out.println("Nombre del ítem:");
-        String name = reader.nextLine();
+        String typeUpper = type.trim().toUpperCase();
+        String name;
+        if (typeUpper.equals("MEDICINE")) {
+            System.out.println("Seleccione un medicamento de la lista o ingrese un nombre manualmente:");
+            for (int i = 0; i < DEFAULT_MEDICINES.size(); i++) {
+                System.out.println((i + 1) + ". " + DEFAULT_MEDICINES.get(i));
+            }
+            String inputName = reader.nextLine();
+            try {
+                int idx = Integer.parseInt(inputName);
+                if (idx >= 1 && idx <= DEFAULT_MEDICINES.size()) {
+                    name = DEFAULT_MEDICINES.get(idx - 1);
+                } else {
+                    name = inputName;
+                }
+            } catch (NumberFormatException nfe) {
+                name = inputName;
+            }
+        } else if (typeUpper.equals("PROCEDURE")) {
+            System.out.println("Seleccione un procedimiento de la lista o ingrese un nombre manualmente:");
+            for (int i = 0; i < DEFAULT_PROCEDURES.size(); i++) {
+                System.out.println((i + 1) + ". " + DEFAULT_PROCEDURES.get(i));
+            }
+            String inputName = reader.nextLine();
+            try {
+                int idx = Integer.parseInt(inputName);
+                if (idx >= 1 && idx <= DEFAULT_PROCEDURES.size()) {
+                    name = DEFAULT_PROCEDURES.get(idx - 1);
+                } else {
+                    name = inputName;
+                }
+            } catch (NumberFormatException nfe) {
+                name = inputName;
+            }
+        } else if (typeUpper.equals("DIAGNOSTIC_AID")) {
+            System.out.println("Seleccione una ayuda diagnóstica de la lista o ingrese un nombre manualmente:");
+            for (int i = 0; i < DEFAULT_DIAGNOSTIC_AIDS.size(); i++) {
+                System.out.println((i + 1) + ". " + DEFAULT_DIAGNOSTIC_AIDS.get(i));
+            }
+            String inputName = reader.nextLine();
+            try {
+                int idx = Integer.parseInt(inputName);
+                if (idx >= 1 && idx <= DEFAULT_DIAGNOSTIC_AIDS.size()) {
+                    name = DEFAULT_DIAGNOSTIC_AIDS.get(idx - 1);
+                } else {
+                    name = inputName;
+                }
+            } catch (NumberFormatException nfe) {
+                name = inputName;
+            }
+        } else {
+            System.out.println("Nombre del ítem:");
+            name = reader.nextLine();
+        }
         String dose = null;
         String treatmentDuration = null;
         String quantity = null;
         String frequency = null;
         String requiresSpecialist = null;
         String specialistTypeId = null;
-        String typeUpper = type.trim().toUpperCase();
         if (typeUpper.equals("MEDICINE")) {
             System.out.println("Dosis del medicamento:");
             dose = reader.nextLine();
@@ -225,5 +319,46 @@ public class DoctorClient {
             }
             System.out.println("-----------------------------------");
         }
+    }
+
+    private List<OrderItem> createDefaultOrderItems() throws Exception {
+        List<OrderItem> defaultItems = new ArrayList<>();
+        defaultItems.add(orderItemBuilder.build(
+            "1",
+            "MEDICINE",
+            DEFAULT_MEDICINES.get(0),
+            "500 mg",
+            "5 días",
+            null,
+            null,
+            "5000",
+            null,
+            null
+        ));
+        defaultItems.add(orderItemBuilder.build(
+            "2",
+            "PROCEDURE",
+            DEFAULT_PROCEDURES.get(0),
+            null,
+            null,
+            "1",
+            "único",
+            "20000",
+            "si",
+            "101"
+        ));
+        defaultItems.add(orderItemBuilder.build(
+            "3",
+            "DIAGNOSTIC_AID",
+            DEFAULT_DIAGNOSTIC_AIDS.get(0),
+            null,
+            null,
+            "1",
+            null,
+            "15000",
+            "no",
+            null
+        ));
+        return defaultItems;
     }
 }
