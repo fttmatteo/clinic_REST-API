@@ -12,7 +12,6 @@ import app.domain.model.VitalSignsRecord;
 /**
  * Cliente de consola para enfermeras.
  * Permite registrar los signos vitales de un paciente de forma interactiva.
- * Este cliente sigue el patrón de interacción definido en el ejemplo del profesor.
  */
 @Controller
 public class NurseClient {

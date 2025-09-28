@@ -45,10 +45,6 @@ public class DoctorClient {
     @Autowired
     private PatientValidator patientValidator;
 
-    /**
-     * Inicia la sesión interactiva para médicos.
-     * El ciclo continúa hasta que el usuario elija salir.
-     */
     public void session() {
         boolean running = true;
         while (running) {
