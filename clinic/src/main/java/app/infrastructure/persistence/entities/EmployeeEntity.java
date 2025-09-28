@@ -12,8 +12,7 @@ import jakarta.persistence.Table;
 /**
  * Entidad JPA que representa a un empleado en la base de datos. Incluye
  * datos personales, de autenticación y el rol que desempeña en la
- * clínica. La fecha de nacimiento se almacena como {@link java.sql.Date}
- * para compatibilidad con la base de datos. Los roles se almacenan
+ * clínica. Los roles se almacenan
  * como cadenas en la base de datos.
  */
 @Entity
