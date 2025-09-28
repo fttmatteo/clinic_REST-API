@@ -1,112 +1,45 @@
 package app.adapter.in.validators;
 
-import java.sql.Date;
-import java.util.regex.Pattern;
 import app.application.exceptions.InputsException;
 
+/**
+ * Clase base para validadores de entrada. Proporciona métodos para validar
+ * cadenas y conversiones básicas a tipos numéricos asegurando que los
+ * valores no sean nulos ni vacíos y que cumplan con el formato esperado.
+ */
 public abstract class SimpleValidator {
-
-    public String stringValidator(String element, String value) throws Exception {
-        if (value == null || value.isBlank()) {
-            throw new InputsException(element + " no puede estar vacío");
+  
+    public String stringValidator(String element, String value) throws InputsException {
+        if (value == null || value.trim().isEmpty()) {
+            throw new InputsException(element + " no puede tener un valor vacío o nulo");
         }
-        return value.trim();
+        return value;
     }
 
-    public int intValidator(String element, String value) throws Exception {
+    public int integerValidator(String element, String value) throws InputsException {
         stringValidator(element, value);
         try {
             return Integer.parseInt(value);
-        } catch (Exception e) {
-            throw new InputsException(element + " debe ser un número entero");
+        } catch (NumberFormatException e) {
+            throw new InputsException(element + " debe ser un valor numérico entero");
         }
     }
 
-    public long longValidator(String element, String value) throws Exception {
+    public long longValidator(String element, String value) throws InputsException {
         stringValidator(element, value);
         try {
             return Long.parseLong(value);
-        } catch (Exception e) {
-            throw new InputsException(element + " debe ser un número entero");
+        } catch (NumberFormatException e) {
+            throw new InputsException(element + " debe ser un valor numérico");
         }
     }
 
-    public float floatValidator(String element, String value) throws Exception {
-  		stringValidator(element, value);
-  		try { return Float.parseFloat(value); }
-  		catch (Exception e) { throw new InputsException(element + " debe ser un número (float)"); }
-	}
-
-    public boolean booleanValidator(String element, String value) throws Exception {
-        stringValidator(element, value);
-        if (!"true".equalsIgnoreCase(value) && !"false".equalsIgnoreCase(value)) {
-            throw new InputsException(element + " debe ser true o false");
-        }
-        return Boolean.parseBoolean(value);
-    }
-
-    public Date dateValidator(String element, String value) throws Exception {
+    public double doubleValidator(String element, String value) throws InputsException {
         stringValidator(element, value);
         try {
-            return Date.valueOf(value);
-        } catch (Exception e) {
-            throw new InputsException(element + " debe tener formato yyyy-MM-dd");
+            return Double.parseDouble(value);
+        } catch (NumberFormatException e) {
+            throw new InputsException(element + " debe ser un valor numérico");
         }
     }
-
-    public String maxLength(String element, String value, int max) throws Exception {
-        String v = stringValidator(element, value);
-        if (v.length() > max) {
-            throw new InputsException(element + " supera el máximo de " + max + " caracteres");
-        }
-        return v;
-    }
-
-    public String digitsExact(String element, String value, int digits) throws Exception {
-        String v = stringValidator(element, value);
-        if (!v.matches("\\d{" + digits + "}")) {
-            throw new InputsException(element + " debe tener exactamente " + digits + " dígitos numéricos");
-        }
-        return v;
-    }
-
-    public String digitsMax(String element, String value, int maxDigits) throws Exception {
-        String v = stringValidator(element, value);
-        if (!v.matches("\\d{1," + maxDigits + "}")) {
-            throw new InputsException(element + " debe tener como máximo " + maxDigits + " dígitos numéricos");
-        }
-        return v;
-    }
-
-    public String emailValidator(String value) throws Exception {
-        String v = stringValidator("email", value);
-        // Regex sencilla y suficiente para capa presentación
-        String regex = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$";
-        if (!Pattern.compile(regex).matcher(v).matches()) {
-            throw new InputsException("email no tiene un formato válido");
-        }
-        return v;
-    }
-
-    public String bloodPressureValidator(String value) throws Exception {
-        String v = stringValidator("presión arterial", value);
-        if (!v.matches("\\d{2,3}/\\d{2,3}")) {
-            throw new InputsException("presión arterial debe tener el formato NN/NN (ej: 120/80)");
-        }
-        return v;
-    }
-
-    public int rangeInt(String element, String value, int min, int max) throws Exception {
-        int n = intValidator(element, value);
-        if (n < min || n > max) {
-            throw new InputsException(element + " debe estar entre " + min + " y " + max);
-        }
-        return n;
-    }
-
-    public float rangeFloat(String element, String value, float min, float max) throws Exception {
-  		float n = floatValidator(element, value);
-  		if (n < min || n > max) throw new InputsException(element + " debe estar entre " + min + " y " + max);
-  		return n;
-	}
 }

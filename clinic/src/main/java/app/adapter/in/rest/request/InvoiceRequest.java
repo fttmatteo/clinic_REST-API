@@ -1,22 +1,53 @@
 package app.adapter.in.rest.request;
 
+/**
+ * Solicitud para crear una factura. Contiene los identificadores del
+ * paciente y del médico (opcional), el nombre del producto o servicio,
+ * el monto, si se trata de un medicamento y, en ese caso, la orden
+ * asociada.
+ */
 public class InvoiceRequest {
-    private String patientDocument;
-    private String professionalName;
-    private String clinicalDetail;
-    private String totalService;   // long
-    private String invoiceDate;    // yyyy-MM-dd
+    private String patientId;
+    private String doctorDocument;
+    private String productName;
+    private String productAmount;
+    private String isMedicine;
+    private String orderId;
 
-    public InvoiceRequest() {}
-
-    public String getPatientDocument() { return patientDocument; }
-    public void setPatientDocument(String patientDocument) { this.patientDocument = patientDocument; }
-    public String getProfessionalName() { return professionalName; }
-    public void setProfessionalName(String professionalName) { this.professionalName = professionalName; }
-    public String getClinicalDetail() { return clinicalDetail; }
-    public void setClinicalDetail(String clinicalDetail) { this.clinicalDetail = clinicalDetail; }
-    public String getTotalService() { return totalService; }
-    public void setTotalService(String totalService) { this.totalService = totalService; }
-    public String getInvoiceDate() { return invoiceDate; }
-    public void setInvoiceDate(String invoiceDate) { this.invoiceDate = invoiceDate; }
+    public String getPatientId() {
+        return patientId;
+    }
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+    public String getDoctorDocument() {
+        return doctorDocument;
+    }
+    public void setDoctorDocument(String doctorDocument) {
+        this.doctorDocument = doctorDocument;
+    }
+    public String getProductName() {
+        return productName;
+    }
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+    public String getProductAmount() {
+        return productAmount;
+    }
+    public void setProductAmount(String productAmount) {
+        this.productAmount = productAmount;
+    }
+    public String getIsMedicine() {
+        return isMedicine;
+    }
+    public void setIsMedicine(String isMedicine) {
+        this.isMedicine = isMedicine;
+    }
+    public String getOrderId() {
+        return orderId;
+    }
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
 }

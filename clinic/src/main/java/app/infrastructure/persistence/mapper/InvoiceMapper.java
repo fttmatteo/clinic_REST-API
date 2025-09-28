@@ -1,35 +1,69 @@
-// InvoiceMapper.java
 package app.infrastructure.persistence.mapper;
 
-import org.springframework.stereotype.Component;
+import app.domain.model.Employee;
 import app.domain.model.Invoice;
+import app.domain.model.MedicalOrder;
+import app.domain.model.Patient;
+import app.infrastructure.persistence.entities.EmployeeEntity;
 import app.infrastructure.persistence.entities.InvoiceEntity;
+import app.infrastructure.persistence.entities.MedicalOrderEntity;
+import app.infrastructure.persistence.entities.PatientEntity;
 
-@Component
+/**
+ * Mapper para convertir entre {@link Invoice} del dominio y
+ * {@link InvoiceEntity} de la capa de persistencia. Maneja las
+ * relaciones opcionales con médicos y órdenes médicas.
+ */
 public class InvoiceMapper {
-  public Invoice toDomain(InvoiceEntity e){
-    if(e==null) return null;
-    Invoice d = new Invoice();
-    d.setInvoiceId(e.getInvoiceId()==null?0L:e.getInvoiceId());
-    d.setPatientDocument(e.getPatientDocument());
-    d.setDoctorName(e.getDoctorName());
-    d.setServiceDescription(e.getServiceDescription());
-    d.setTotalPatient(e.getTotalPatient());
-    d.setCopayment(e.getCopayment());
-    d.setTotalInsurance(e.getTotalInsurance());
-    d.setEndDatePolicy(e.getEndDatePolicy());
-    return d;
-  }
-  public InvoiceEntity toEntity(Invoice d){
-    InvoiceEntity e = new InvoiceEntity();
-    if (d.getInvoiceId() > 0) e.setInvoiceId(d.getInvoiceId());
-    e.setPatientDocument(d.getPatientDocument());
-    e.setDoctorName(d.getDoctorName());
-    e.setServiceDescription(d.getServiceDescription());
-    e.setTotalPatient(d.getTotalPatient());
-    e.setCopayment(d.getCopayment());
-    e.setTotalPayable(d.getTotalInsurance());
-    e.setEndDatePolicy(d.getEndDatePolicy());
-    return e;
-  }
+    public static InvoiceEntity toEntity(Invoice invoice) {
+        if (invoice == null) return null;
+        InvoiceEntity entity = new InvoiceEntity();
+        entity.setId(invoice.getId());
+        if (invoice.getPatient() != null) {
+            PatientEntity patientEntity = new PatientEntity();
+            patientEntity.setId(invoice.getPatient().getId());
+            entity.setPatient(patientEntity);
+        }
+        if (invoice.getDoctor() != null) {
+            EmployeeEntity doctorEntity = new EmployeeEntity();
+            doctorEntity.setId(invoice.getDoctor().getId());
+            entity.setDoctor(doctorEntity);
+        }
+        entity.setProductName(invoice.getProductName());
+        entity.setProductAmount(invoice.getProductAmount());
+        entity.setMedicine(invoice.isMedicine());
+        if (invoice.getOrder() != null) {
+            MedicalOrderEntity orderEntity = new MedicalOrderEntity();
+            orderEntity.setId(invoice.getOrder().getId());
+            entity.setOrder(orderEntity);
+        }
+        entity.setDate(invoice.getDate());
+        return entity;
+    }
+
+    public static Invoice toDomain(InvoiceEntity entity) {
+        if (entity == null) return null;
+        Invoice invoice = new Invoice();
+        invoice.setId(entity.getId());
+        if (entity.getPatient() != null) {
+            Patient patient = new Patient();
+            patient.setId(entity.getPatient().getId());
+            invoice.setPatient(patient);
+        }
+        if (entity.getDoctor() != null) {
+            Employee doctor = new Employee();
+            doctor.setId(entity.getDoctor().getId());
+            invoice.setDoctor(doctor);
+        }
+        invoice.setProductName(entity.getProductName());
+        invoice.setProductAmount(entity.getProductAmount());
+        invoice.setMedicine(entity.getMedicine());
+        if (entity.getOrder() != null) {
+            MedicalOrder order = new MedicalOrder();
+            order.setId(entity.getOrder().getId());
+            invoice.setOrder(order);
+        }
+        invoice.setDate(entity.getDate());
+        return invoice;
+    }
 }

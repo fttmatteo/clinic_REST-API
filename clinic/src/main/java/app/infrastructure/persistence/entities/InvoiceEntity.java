@@ -1,39 +1,100 @@
 package app.infrastructure.persistence.entities;
 
-import jakarta.persistence.*;
 import java.sql.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+/**
+ * Entidad JPA que representa una factura emitida por la clínica. Contiene
+ * la relación con el paciente y opcionalmente con el médico y la orden
+ * médica, así como la información del producto/servicio facturado,
+ * el monto, si corresponde a un medicamento y la fecha de emisión.
+ */
 @Entity
-@Table(name="invoices")
+@Table(name = "invoices")
 public class InvoiceEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-  @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long invoiceId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patient_id", nullable = false)
+    private PatientEntity patient;
 
-  @Column(nullable=false) private int patientDocument;
-  @Column(nullable=false, length=120) private String doctorName;
-  @Column(length=1000) private String serviceDescription;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "doctor_id")
+    private EmployeeEntity doctor;
 
-  @Column(nullable=false) private long copayment;
-  @Column(nullable=false) private long totalPatient;
-  @Column(nullable=false) private long totalInsurance;
+    @Column(nullable = false, length = 150)
+    private String productName;
 
-  @Column(nullable=false) private Date endDatePolicy;
+    @Column(nullable = false)
+    private Double productAmount;
 
-  public Long getInvoiceId() { return invoiceId; }
-  public void setInvoiceId(Long invoiceId) { this.invoiceId = invoiceId; }
-  public int getPatientDocument() { return patientDocument; }
-  public void setPatientDocument(int patientDocument) { this.patientDocument = patientDocument; }
-  public String getDoctorName() { return doctorName; }
-  public void setDoctorName(String doctorName) { this.doctorName = doctorName; }
-  public String getServiceDescription() { return serviceDescription; }
-  public void setServiceDescription(String serviceDescription) { this.serviceDescription = serviceDescription; }
-  public long getCopayment() { return copayment; }
-  public void setCopayment(long copayment) { this.copayment = copayment; }
-  public long getTotalPatient() { return totalPatient; }
-  public void setTotalPatient(long totalPatient) { this.totalPatient = totalPatient; }
-  public long getTotalInsurance() { return totalInsurance; }
-  public void setTotalPayable(long totalPayable) { this.totalInsurance = totalPayable; }
-  public Date getEndDatePolicy() { return endDatePolicy; }
-  public void setEndDatePolicy(Date endDatePolicy) { this.endDatePolicy = endDatePolicy; }
+    @Column(nullable = false)
+    private Boolean medicine;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "order_id")
+    private MedicalOrderEntity order;
+
+    @Column(nullable = false)
+    private Date date;
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public PatientEntity getPatient() {
+        return patient;
+    }
+    public void setPatient(PatientEntity patient) {
+        this.patient = patient;
+    }
+    public EmployeeEntity getDoctor() {
+        return doctor;
+    }
+    public void setDoctor(EmployeeEntity doctor) {
+        this.doctor = doctor;
+    }
+    public String getProductName() {
+        return productName;
+    }
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+    public Double getProductAmount() {
+        return productAmount;
+    }
+    public void setProductAmount(Double productAmount) {
+        this.productAmount = productAmount;
+    }
+    public Boolean getMedicine() {
+        return medicine;
+    }
+    public void setMedicine(Boolean medicine) {
+        this.medicine = medicine;
+    }
+    public MedicalOrderEntity getOrder() {
+        return order;
+    }
+    public void setOrder(MedicalOrderEntity order) {
+        this.order = order;
+    }
+    public Date getDate() {
+        return date;
+    }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

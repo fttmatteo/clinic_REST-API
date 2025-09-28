@@ -1,24 +1,40 @@
 package app.adapter.in.validators;
 
-import java.sql.Date;
-import app.application.exceptions.InputsException;
 import org.springframework.stereotype.Component;
 
+import app.application.exceptions.InputsException;
+
+/**
+ * Validador para las facturas. Comprueba el nombre del producto, el monto
+ * facturado y los identificadores de paciente, médico y orden cuando
+ * corresponda.
+ */
 @Component
 public class InvoiceValidator extends SimpleValidator {
-
-    public int patientDocumentValidator(String value) throws Exception {
-        digitsMax("documento del paciente", value, 10);
-        return intValidator("documento del paciente", value);
+    public String productNameValidator(String value) throws InputsException {
+        return stringValidator("nombre del producto", value);
     }
-
-    public long totalServiceValidator(String value) throws Exception {
-        long t = longValidator("total del servicio", value);
-        if (t < 0) throw new InputsException("total del servicio no puede ser negativo");
-        return t;
+    public double amountValidator(String value) throws InputsException {
+        return doubleValidator("monto de la factura", value);
     }
-
-    public Date invoiceDateValidator(String value) throws Exception {
-        return dateValidator("fecha de la factura", value);
+    public long patientIdValidator(String value) throws InputsException {
+        return longValidator("id del paciente", value);
+    }
+    public long doctorDocumentValidator(String value) throws InputsException {
+        return longValidator("cédula del médico", value);
+    }
+    public boolean isMedicineValidator(String value) throws InputsException {
+        stringValidator("indicación de medicamento", value);
+        String lower = value.toLowerCase();
+        if (lower.equals("si") || lower.equals("true")) {
+            return true;
+        }
+        if (lower.equals("no") || lower.equals("false")) {
+            return false;
+        }
+        throw new InputsException("debe indicar si la factura es de medicamento (si/no)");
+    }
+    public long orderIdValidator(String value) throws InputsException {
+        return longValidator("id de la orden", value);
     }
 }

@@ -1,114 +1,27 @@
 package app.domain.model;
 
-import java.sql.Date;
+/**
+ * Representa a un paciente de la clínica. Hereda los atributos comunes de
+ * {@link Person} y añade información específica del paciente como el contacto de
+ * emergencia y la póliza de seguro médico.
+ */
+public class Patient extends Person {
+    private EmergencyContact emergencyContact;
+    private InsurancePolicy insurancePolicy;
 
-public class Patient {
-    private int patientDocument;
-    private String fullName;
-    private Date birthDate;
-    private String gender;
-    private String address;
-    private int phoneNumber;
-    private String email;   
-    private String emergencyFirstName;
-    private String emergencyLastName;
-    private String relationShip;
-    private int emergencyPhone;
-    private MedicalInsurance insurancePolicy;
-
-    public int getPatientDocument() {
-        return patientDocument;
+    public EmergencyContact getEmergencyContact() {
+        return emergencyContact;
     }
 
-    public void setPatientDocument(int document) {
-        this.patientDocument = document;
+    public void setEmergencyContact(EmergencyContact emergencyContact) {
+        this.emergencyContact = emergencyContact;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getEmergencyFirstName() {
-        return emergencyFirstName;
-    }
-
-    public void setEmergencyFirstName(String emergencyFirstName) {
-        this.emergencyFirstName = emergencyFirstName;
-    }
-
-    public String getEmergencyLastName() {
-        return emergencyLastName;
-    }
-
-    public void setEmergencyLastName(String emergencyLastName) {
-        this.emergencyLastName = emergencyLastName;
-    }
-
-    public String getRelationShip() {
-        return relationShip;
-    }
-
-    public void setRelationShip(String relationShip) {
-        this.relationShip = relationShip;
-    }
-
-    public int getEmergencyPhone() {
-        return emergencyPhone;
-    }
-
-    public void setEmergencyPhone(int emergencyPhone) {
-        this.emergencyPhone = emergencyPhone;
-    }
-
-    public MedicalInsurance getInsurancePolicy() {
+    public InsurancePolicy getInsurancePolicy() {
         return insurancePolicy;
     }
 
-    public void setInsurancePolicy(MedicalInsurance insurancePolicy) {
+    public void setInsurancePolicy(InsurancePolicy insurancePolicy) {
         this.insurancePolicy = insurancePolicy;
     }
 }

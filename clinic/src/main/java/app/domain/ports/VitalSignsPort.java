@@ -1,9 +1,11 @@
 package app.domain.ports;
 
-import java.util.List;
-import app.domain.model.VitalSigns;
+import app.domain.model.VitalSignsRecord;
 
+/**
+ * Puerto de persistencia para los registros de signos vitales. Permite
+ * almacenar los registros tomados por las enfermeras.
+ */
 public interface VitalSignsPort {
-    public VitalSigns save(VitalSigns vitalSigns) throws Exception;
-    public List<VitalSigns> listByPatient (int documentPatient) throws Exception;
+    void save(VitalSignsRecord record) throws Exception;
 }

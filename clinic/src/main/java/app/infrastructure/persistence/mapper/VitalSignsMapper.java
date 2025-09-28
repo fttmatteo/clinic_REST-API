@@ -1,31 +1,59 @@
-// VitalSignsMapper.java
 package app.infrastructure.persistence.mapper;
 
-import org.springframework.stereotype.Component;
-import app.domain.model.VitalSigns;
-import app.infrastructure.persistence.entities.VitalSignsEntity;
-import app.infrastructure.persistence.entities.VitalSignsKey;
+import app.domain.model.Employee;
+import app.domain.model.Patient;
+import app.domain.model.VitalSignsRecord;
+import app.infrastructure.persistence.entities.EmployeeEntity;
+import app.infrastructure.persistence.entities.PatientEntity;
+import app.infrastructure.persistence.entities.VitalSignsRecordEntity;
 
-@Component
+/**
+ * Mapper para convertir entre {@link VitalSignsRecord} del dominio y
+ * {@link VitalSignsRecordEntity} de la capa de persistencia. Maneja la
+ * conversión de las referencias a enfermera y paciente.
+ */
 public class VitalSignsMapper {
-  public VitalSigns toDomain(VitalSignsEntity e){
-    if(e==null) return null;
-    VitalSigns d = new VitalSigns();
-    d.setPatientDocument(e.getVitalId().getPatientDocument());
-    d.setRegistrationDate(e.getVitalId().getRegistrationDate());
-    d.setBloodPressure(e.getBloodPressure());
-    d.setTemperature(e.getTemperature());
-    d.setPulse(e.getPulse());
-    d.setOxygenSaturation(e.getOxygenSaturation());
-    return d;
-  }
-  public VitalSignsEntity toEntity(VitalSigns d){
-    VitalSignsEntity e = new VitalSignsEntity();
-    e.setVitalId(new VitalSignsKey(d.getPatientDocument(), d.getRegistrationDate()));
-    e.setBloodPressure(d.getBloodPressure());
-    e.setTemperature(d.getTemperature());
-    e.setPulse(d.getPulse());
-    e.setOxygenSaturation(d.getOxygenSaturation());
-    return e;
-  }
+    public static VitalSignsRecordEntity toEntity(VitalSignsRecord record) {
+        if (record == null) return null;
+        VitalSignsRecordEntity entity = new VitalSignsRecordEntity();
+        entity.setId(record.getId());
+        if (record.getNurse() != null) {
+            EmployeeEntity nurse = new EmployeeEntity();
+            nurse.setId(record.getNurse().getId());
+            entity.setNurse(nurse);
+        }
+        if (record.getPatient() != null) {
+            PatientEntity patient = new PatientEntity();
+            patient.setId(record.getPatient().getId());
+            entity.setPatient(patient);
+        }
+        entity.setDateTime(record.getDateTime());
+        entity.setBloodPressure(record.getBloodPressure());
+        entity.setTemperature(record.getTemperature());
+        entity.setPulse(record.getPulse());
+        entity.setOxygenLevel(record.getOxygenLevel());
+        return entity;
+    }
+
+    public static VitalSignsRecord toDomain(VitalSignsRecordEntity entity) {
+        if (entity == null) return null;
+        VitalSignsRecord record = new VitalSignsRecord();
+        record.setId(entity.getId());
+        if (entity.getNurse() != null) {
+            Employee nurse = new Employee();
+            nurse.setId(entity.getNurse().getId());
+            record.setNurse(nurse);
+        }
+        if (entity.getPatient() != null) {
+            Patient patient = new Patient();
+            patient.setId(entity.getPatient().getId());
+            record.setPatient(patient);
+        }
+        record.setDateTime(entity.getDateTime());
+        record.setBloodPressure(entity.getBloodPressure());
+        record.setTemperature(entity.getTemperature());
+        record.setPulse(entity.getPulse());
+        record.setOxygenLevel(entity.getOxygenLevel());
+        return record;
+    }
 }

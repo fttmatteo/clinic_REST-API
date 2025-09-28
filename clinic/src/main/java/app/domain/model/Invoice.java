@@ -2,121 +2,83 @@ package app.domain.model;
 
 import java.sql.Date;
 
+/**
+ * Representa una factura emitida por la clínica. Una factura incluye al
+ * paciente, al médico tratante, la orden médica asociada (si corresponde),
+ * el nombre del producto o servicio facturado y el monto total. Cuando se
+ * factura un medicamento, siempre debe existir una orden médica asociada.
+ */
 public class Invoice {
-    private long invoiceId;
-    private String patientName;
-    private int patientAge;
-    private int patientDocument;
-    private String doctorName;
-    private String companyName;
-    private long numberPolicy;
-    private int validityDaysPolicy;
-    private Date endDatePolicy;
-    private String serviceDescription;
-    private long copayment;
-    private long totalPatient;
-    private long totalInsurance;    
+    private long id;
+    private Patient patient;
+    private Employee doctor;
+    private MedicalOrder order;
+    private String productName;
+    private double productAmount;
+    private Date date;
+    private boolean medicine;
 
-    public long getInvoiceId() {
-        return invoiceId;
+    public long getId() {
+        return id;
     }
 
-    public void setInvoiceId(long id) {
-        this.invoiceId = id;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public String getPatientName() {
-        return patientName;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setPatientName(String patientName) {
-        this.patientName = patientName;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
     }
 
-    public int getPatientAge() {
-        return patientAge;
+    public Employee getDoctor() {
+        return doctor;
     }
 
-    public void setPatientAge(int patientAge) {
-        this.patientAge = patientAge;
+    public void setDoctor(Employee doctor) {
+        this.doctor = doctor;
     }
 
-    public int getPatientDocument() {
-        return patientDocument;
+    public MedicalOrder getOrder() {
+        return order;
     }
 
-    public void setPatientDocument(int patientDocument) {
-        this.patientDocument = patientDocument;
+    public void setOrder(MedicalOrder order) {
+        this.order = order;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
-    public String getCompanyName() {
-        return companyName;
+    public double getProductAmount() {
+        return productAmount;
     }
 
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
+    public void setProductAmount(double productAmount) {
+        this.productAmount = productAmount;
     }
 
-    public long getNumberPolicy() {
-        return numberPolicy;
+    public Date getDate() {
+        return date;
     }
 
-    public void setNumberPolicy(long numberPolicy) {
-        this.numberPolicy = numberPolicy;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public int getValidityDaysPolicy() {
-        return validityDaysPolicy;
+    public boolean isMedicine() {
+        return medicine;
     }
 
-    public void setValidityDaysPolicy(int validityDaysPolicy) {
-        this.validityDaysPolicy = validityDaysPolicy;
+    public void setMedicine(boolean medicine) {
+        this.medicine = medicine;
     }
-
-    public Date getEndDatePolicy() {
-        return endDatePolicy;
-    }
-
-    public void setEndDatePolicy(Date endDatePolicy) {
-        this.endDatePolicy = endDatePolicy;
-    }
-    public String getServiceDescription() {
-        return serviceDescription;
-    }
-
-    public void setServiceDescription(String serviceDescription) {
-        this.serviceDescription = serviceDescription;
-    }
-
-    public long getCopayment() {
-        return copayment;
-    }
-
-    public void setCopayment(long copayment) {
-        this.copayment = copayment;
-    }
-
-    public long getTotalPatient() {
-        return totalPatient;
-    }
-
-    public void setTotalPatient(long totalPatient) {
-        this.totalPatient = totalPatient;
-    }
-
-    public long getTotalInsurance() {
-        return totalInsurance;
-    }
-
-    public void setTotalInsurance(long totalInsurance) {
-        this.totalInsurance = totalInsurance;
-    }
-    }
+}

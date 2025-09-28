@@ -2,10 +2,13 @@ package app.domain.ports;
 
 import app.domain.model.Employee;
 
+/**
+ * Puerto de persistencia para operaciones relacionadas con los empleados de la
+ * clínica. Define las operaciones básicas que deben implementar los
+ * adaptadores de infraestructura para almacenar y recuperar empleados.
+ */
 public interface EmployeePort {
-
-    public Employee findByDocument(int document) throws Exception;
-    public Employee findByUserName(String userName) throws Exception;
-    public Employee save(Employee employee) throws Exception;
-    public void deleteByDocument(int document) throws Exception;
+    Employee findByDocument(Employee employee) throws Exception;
+    Employee findByUserName(Employee employee) throws Exception;
+    void save(Employee employee) throws Exception;
 }
