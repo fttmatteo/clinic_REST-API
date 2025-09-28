@@ -14,15 +14,10 @@ import java.util.List;
  * dentro de una orden sean únicos.
  */
 public class MedicalOrder {
-    /** Número identificador único de la orden (máximo 6 dígitos). */
     private long id;
-    /** Paciente al que se aplica la orden. */
     private Patient patient;
-    /** Médico que prescribe la orden. */
     private Employee doctor;
-    /** Fecha de creación de la orden. */
     private LocalDate creationDate;
-    /** Lista de ítems asociados a la orden. */
     private List<OrderItem> items = new ArrayList<>();
 
     public long getId() {
