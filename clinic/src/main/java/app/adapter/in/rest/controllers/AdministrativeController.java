@@ -27,8 +27,7 @@ import app.domain.model.Patient;
 /**
  * Controlador REST para las operaciones del personal administrativo. Permite
  * registrar pacientes, emitir facturas y consultar las órdenes médicas
- * asociadas a un paciente. Los mensajes de respuesta se retornan en
- * español según las reglas del proyecto.
+ * asociadas a un paciente.
  */
 @RestController
 @RequestMapping("/administrative")
