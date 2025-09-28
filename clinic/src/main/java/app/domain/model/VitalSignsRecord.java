@@ -1,6 +1,6 @@
 package app.domain.model;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 /**
  * Representa un registro de signos vitales tomados por una enfermera. Incluye
@@ -12,7 +12,7 @@ public class VitalSignsRecord {
     private long id;
     private Patient patient;
     private Employee nurse;
-    private LocalDateTime dateTime;
+    private Timestamp dateTime;
     private String bloodPressure;
     private double temperature;
     private int pulse;
@@ -42,11 +42,11 @@ public class VitalSignsRecord {
         this.nurse = nurse;
     }
 
-    public LocalDateTime getDateTime() {
+    public Timestamp getDateTime() {
         return dateTime;
     }
 
-    public void setDateTime(LocalDateTime dateTime) {
+    public void setDateTime(Timestamp dateTime) {
         this.dateTime = dateTime;
     }
 
