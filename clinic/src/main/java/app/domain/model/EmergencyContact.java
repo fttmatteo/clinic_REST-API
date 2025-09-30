@@ -6,7 +6,7 @@ package app.domain.model;
  * teléfono. Sólo se permite un único contacto de emergencia por paciente.
  */
 public class EmergencyContact {
-    private long id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String relationship;
@@ -44,11 +44,11 @@ public class EmergencyContact {
         this.phone = phone;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
