@@ -23,11 +23,12 @@ import app.domain.model.Patient;
 public class AdministrativeClient {
 
     private static final String MENU =
+        "---------- AREÁ ADMINISTRATIVA ----------\n" +
         "Ingrese una opción:\n" +
         "1. Registrar paciente\n" +
         "2. Crear factura\n" +
         "3. Consultar órdenes de un paciente\n" +
-        "4. Salir";
+        "4. SALIR\n";
 
     private static final Scanner reader = new Scanner(System.in);
 
@@ -67,11 +68,11 @@ public class AdministrativeClient {
                 return true;
             }
             case "4": {
-                System.out.println("Hasta luego. Cerrando sesión.");
+                System.out.println("Cerrando sesión del área administrativa...");
                 return false;
             }
             default: {
-                System.out.println("Opción inválida. Por favor intente de nuevo.");
+                System.out.println("Opción inválida. Por favor elija una opción del 1 al 4.");
                 return true;
             }
             }

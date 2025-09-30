@@ -18,12 +18,13 @@ import app.domain.model.Employee;
 public class HumanResourcesClient {
 
     private static final String MENU =
+        "---------- ÁREA RECURSOS HUMANOS ----------\n" +
         "Ingrese una opción:\n" +
         "1. Crear médico\n" +
         "2. Crear enfermera\n" +
         "3. Crear personal administrativo\n" +
         "4. Crear personal de soporte de información\n" +
-        "5. Salir";
+        "5. SALIR\n";
 
     private static final Scanner reader = new Scanner(System.in);
 
@@ -66,11 +67,11 @@ public class HumanResourcesClient {
                 return true;
             }
             case "5": {
-                System.out.println("Hasta luego. Cerrando sesión.");
+                System.out.println("Cerrando sesión del área recursos humanos...");
                 return false;
             }
             default: {
-                System.out.println("Opción inválida, por favor intente de nuevo.");
+                System.out.println("Opción inválida. Por favor elija una opción del 1 al 4.");
                 return true;
             }
             }

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 public class ClinicClient {
 
     private static final String MENU =
-        "---------- MENÚ PRINCIPAL ----------\n" +
+        "---------- CLINICA ----------\n" +
         "Seleccione el área con la que desea operar:\n" +
         "1. Recursos Humanos\n" +
         "2. Administrativo\n" +
@@ -62,7 +62,7 @@ public class ClinicClient {
                 return true;
             }
             case "5": {
-                System.out.println("Hasta luego. Cerrando sesión.");
+                System.out.println("Cerrando sesión principal...");
                 return false;
             }
             default: {
