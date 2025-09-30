@@ -9,7 +9,7 @@ import java.sql.Timestamp;
  * médica asociada.
  */
 public class MedicalRecord {
-    private long id;
+    private Long id;
     private Patient patient;
     private Employee doctor;
     /**
@@ -24,11 +24,11 @@ public class MedicalRecord {
     private MedicalOrder medicalOrder;
     private boolean active;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -26,11 +26,12 @@ import app.application.usecase.DoctorUseCase;
 public class DoctorClient {
 
     private static final String MENU =
+        "---------- ÁREA MÉDICA ----------\n" +
         "Ingrese una opción:\n" +
         "1. Crear orden médica\n" +
         "2. Registrar historia clínica\n" +
         "3. Consultar órdenes de un paciente\n" +
-        "4. Salir";
+        "4. SALIR\n";
 
     private static final Scanner reader = new Scanner(System.in);
 
@@ -74,11 +75,11 @@ public class DoctorClient {
                 return true;
             }
             case "4": {
-                System.out.println("Hasta luego. Cerrando sesión.");
+                System.out.println("Cerrando sesión del área medica...");
                 return false;
             }
             default: {
-                System.out.println("Opción inválida. Por favor intente de nuevo.");
+                System.out.println("Opción inválida. Por favor elija una opción del 1 al 4.");
                 return true;
             }
             }
@@ -89,8 +90,6 @@ public class DoctorClient {
     }
 
     private MedicalOrder readOrderData() throws Exception {
-        System.out.println("Ingrese el identificador de la orden médica (máximo 6 dígitos):");
-        String id = reader.nextLine();
         System.out.println("Ingrese el documento del médico que genera la orden:");
         String doctorDocument = reader.nextLine();
         System.out.println("Ingrese el documento del paciente:");
@@ -120,7 +119,7 @@ public class DoctorClient {
                 items.add(item);
             }
         }
-        return orderBuilder.build(id, doctorDocument, patientDocument, items);
+        return orderBuilder.build(doctorDocument, patientDocument, items);
     }
 
     private OrderItem readOrderItemData(int index) throws Exception {

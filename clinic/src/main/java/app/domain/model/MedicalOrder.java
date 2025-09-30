@@ -14,17 +14,17 @@ import java.util.List;
  * dentro de una orden sean únicos.
  */
 public class MedicalOrder {
-    private long id;
+    private Long id;
     private Patient patient;
     private Employee doctor;
     private Date creationDate;
     private List<OrderItem> items = new ArrayList<>();
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

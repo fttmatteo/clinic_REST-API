@@ -9,16 +9,7 @@ package app.domain.model.inventory;
 public class Procedure {
     private String id;
     private String name;
-    private double cost;
-
-    public Procedure() {
-    }
-
-    public Procedure(String id, String name, double cost) {
-        this.id = id;
-        this.name = name;
-        this.cost = cost;
-    }
+    private Double cost;
 
     public String getId() {
         return id;
@@ -36,11 +27,11 @@ public class Procedure {
         this.name = name;
     }
 
-    public double getCost() {
+    public Double getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(Double cost) {
         this.cost = cost;
     }
 }

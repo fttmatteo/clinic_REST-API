@@ -15,17 +15,17 @@ public class InsurancePolicy {
      * mapear la entidad con la base de datos. Un valor de cero indica que
      * todavía no ha sido persistida.
      */
-    private long id;
+    private Long id;
     private String companyName;
     private String policyNumber;
     private boolean active;
     private Date expiryDate;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import app.adapter.in.validators.MedicalOrderValidator;
 import app.adapter.in.validators.PatientValidator;
 import app.adapter.in.validators.EmployeeValidator;
 import app.domain.model.Employee;
@@ -22,15 +21,12 @@ import app.domain.model.Patient;
 @Component
 public class MedicalOrderBuilder {
     @Autowired
-    private MedicalOrderValidator orderValidator;
-    @Autowired
     private EmployeeValidator employeeValidator;
     @Autowired
     private PatientValidator patientValidator;
 
-    public MedicalOrder build(String id, String doctorDocument, String patientId, List<OrderItem> items) throws Exception {
+    public MedicalOrder build(String doctorDocument, String patientId, List<OrderItem> items) throws Exception {
         MedicalOrder order = new MedicalOrder();
-        order.setId(orderValidator.idValidator(id));
         Employee doctor = new Employee();
         doctor.setDocument(employeeValidator.documentValidator(doctorDocument));
         order.setDoctor(doctor);

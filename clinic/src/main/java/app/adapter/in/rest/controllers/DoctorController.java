@@ -70,7 +70,6 @@ public class DoctorController {
                 }
             }
             MedicalOrder order = medicalOrderBuilder.build(
-                    request.getId(),
                     request.getDoctorDocument(),
                     request.getPatientId(),
                     items

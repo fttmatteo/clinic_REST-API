@@ -17,9 +17,10 @@ import app.domain.model.VitalSignsRecord;
 public class NurseClient {
 
     private static final String MENU =
+        "---------- ÁREA ENFERMERÍA ----------\n" +
         "Ingrese una opción:\n" +
         "1. Registrar signos vitales\n" +
-        "2. Salir";
+        "2. SALIR\n";
 
     private static final Scanner reader = new Scanner(System.in);
 
@@ -46,11 +47,11 @@ public class NurseClient {
                 return true;
             }
             case "2": {
-                System.out.println("Hasta luego. Cerrando sesión.");
+                System.out.println("Cerrando sesión del área enfermería...");
                 return false;
             }
             default: {
-                System.out.println("Opción inválida. Por favor intente de nuevo.");
+                System.out.println("Opción inválida. Por favor elija una opción del 1 al 2.");
                 return true;
             }
             }
