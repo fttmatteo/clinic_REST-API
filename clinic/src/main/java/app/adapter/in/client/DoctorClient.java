@@ -90,8 +90,6 @@ public class DoctorClient {
     }
 
     private MedicalOrder readOrderData() throws Exception {
-        System.out.println("Ingrese el identificador de la orden médica (máximo 6 dígitos):");
-        String id = reader.nextLine();
         System.out.println("Ingrese el documento del médico que genera la orden:");
         String doctorDocument = reader.nextLine();
         System.out.println("Ingrese el documento del paciente:");
@@ -121,7 +119,7 @@ public class DoctorClient {
                 items.add(item);
             }
         }
-        return orderBuilder.build(id, doctorDocument, patientDocument, items);
+        return orderBuilder.build(doctorDocument, patientDocument, items);
     }
 
     private OrderItem readOrderItemData(int index) throws Exception {

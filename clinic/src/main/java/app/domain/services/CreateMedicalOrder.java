@@ -45,8 +45,10 @@ public class CreateMedicalOrder {
         if (patient == null) {
             throw new BusinessException("La orden debe asociarse a un paciente registrado");
         }
-        if (orderPort.findById(order) != null) {
-            throw new BusinessException("Ya existe una orden con ese identificador");
+        if (order.getId() != null) {
+            if (orderPort.findById(order) != null) {
+                throw new BusinessException("Ya existe una orden con ese identificador");
+            }
         }
         boolean hasDiagnosticAid = false;
         Set<Integer> usedItemNumbers = new HashSet<>();

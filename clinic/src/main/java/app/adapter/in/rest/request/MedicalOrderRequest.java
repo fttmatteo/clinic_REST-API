@@ -10,17 +10,10 @@ import java.util.List;
  * transformarán a dominios.
  */
 public class MedicalOrderRequest {
-    private String id;
     private String doctorDocument;
     private String patientId;
     private List<OrderItemRequest> items;
 
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
-    }
     public String getDoctorDocument() {
         return doctorDocument;
     }
