@@ -91,7 +91,7 @@ public class HumanResourcesClient {
         String fullName = promptValidator("Ingrese el nombre completo:", employeeValidator::fullNameValidator);
         String document = promptValidator("Ingrese el numero de documento:", value -> {
             long parsed = employeeValidator.documentValidator(value);
-            humanResourcesUseCase.ensureDocumentIsUnique(parsed);
+            humanResourcesUseCase.documentIsUnique(parsed);
             return value;
         });
         String birthDate = promptValidator("Ingrese la fecha de nacimiento (DD/MM/YYYY):", value -> {
@@ -103,7 +103,7 @@ public class HumanResourcesClient {
         String email = promptValidator("Ingrese el correo electronico:", employeeValidator::emailValidator);
         String userName = promptValidator("Ingrese el nombre de usuario:", value -> {
             String validated = employeeValidator.userNameValidator(value);
-            humanResourcesUseCase.ensureUserNameIsUnique(validated);
+            humanResourcesUseCase.userNameIsUnique(validated);
             return validated;
         });
         String password = promptValidator("Ingrese la contraseña:", employeeValidator::passwordValidator);
