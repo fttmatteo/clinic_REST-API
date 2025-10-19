@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 
 /**
  * Entidad JPA para las ayudas diagnósticas. Se utiliza para mapear
- * objetos {@link app.domain.model.inventory.DiagnosticAid} a registros
+ * objetos {@link app.domain.model.DiagnosticAid} a registros
  * en la base de datos.
  */
 @Entity
