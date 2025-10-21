@@ -1,9 +1,10 @@
-package app.adapter.out;
+package app.adapter.out.persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import app.domain.model.Invoice;
+import app.domain.model.Patient;
 import app.domain.ports.InvoicePort;
 import app.infrastructure.persistence.entities.InvoiceEntity;
 import app.infrastructure.persistence.mapper.InvoiceMapper;
@@ -24,5 +25,13 @@ public class InvoiceAdapter implements InvoicePort {
         InvoiceEntity entity = InvoiceMapper.toEntity(invoice);
         invoiceRepository.save(entity);
         invoice.setId(entity.getId());
+    }
+
+    @Override
+    public double sumCopayByPatientAndYear(Patient patient, int year) throws Exception {
+        if (patient == null) return 0;
+        Long patientId = patient.getId();
+        if (patientId == null) return 0;
+        return invoiceRepository.sumCopayByPatientIdAndYear(patientId, year);
     }
 }

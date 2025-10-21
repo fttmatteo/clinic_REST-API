@@ -5,24 +5,35 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 /**
- * Entidad JPA que representa un ítem dentro de una orden médica. Almacena
- * información específica según el tipo de ítem (medicamento,
- * procedimiento o ayuda diagnóstica). Cada ítem está relacionado con
- * una orden mediante una relación muchos a uno.
+ * Entidad base JPA que representa un ítem dentro de una orden médica. Esta
+ * clase solo contiene los atributos comunes a todos los tipos de ítems.
+ * La información específica de medicamentos, procedimientos y ayudas
+ * diagnósticas se almacena en subclases que extienden de esta entidad.
+ * Además, se define una restricción de unicidad sobre el par
+ * (order_id, item_number) para garantizar que no haya dos ítems con el
+ * mismo número dentro de una misma orden.
  */
 @Entity
-@Table(name = "order_items")
-public class OrderItemEntity {
+@Table(
+    name = "order_items",
+    uniqueConstraints = @UniqueConstraint(columnNames = {"order_id", "item_number"})
+)
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class OrderItemEntity {
+ 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(name = "item_number", nullable = false)
     private Integer itemNumber;
 
     @Column(nullable = false, length = 20)
@@ -30,18 +41,6 @@ public class OrderItemEntity {
 
     @Column(nullable = false, length = 100)
     private String name;
-
-    @Column
-    private String dose;
-
-    @Column
-    private String treatmentDuration;
-
-    @Column
-    private Integer quantity;
-
-    @Column
-    private String frequency;
 
     @Column(nullable = false)
     private Double cost;
@@ -79,30 +78,6 @@ public class OrderItemEntity {
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public String getDose() {
-        return dose;
-    }
-    public void setDose(String dose) {
-        this.dose = dose;
-    }
-    public String getTreatmentDuration() {
-        return treatmentDuration;
-    }
-    public void setTreatmentDuration(String treatmentDuration) {
-        this.treatmentDuration = treatmentDuration;
-    }
-    public Integer getQuantity() {
-        return quantity;
-    }
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-    public String getFrequency() {
-        return frequency;
-    }
-    public void setFrequency(String frequency) {
-        this.frequency = frequency;
     }
     public Double getCost() {
         return cost;

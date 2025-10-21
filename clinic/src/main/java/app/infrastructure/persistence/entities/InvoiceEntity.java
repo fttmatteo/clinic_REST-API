@@ -42,6 +42,12 @@ public class InvoiceEntity {
     @Column(nullable = false)
     private Boolean medicine;
 
+    @Column(nullable = false)
+    private Double copay;
+
+    @Column(nullable = false)
+    private Double billedToInsurer;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
     private MedicalOrderEntity order;
@@ -84,6 +90,22 @@ public class InvoiceEntity {
     }
     public void setMedicine(Boolean medicine) {
         this.medicine = medicine;
+    }
+
+    public Double getCopay() {
+        return copay;
+    }
+
+    public void setCopay(Double copay) {
+        this.copay = copay;
+    }
+
+    public Double getBilledToInsurer() {
+        return billedToInsurer;
+    }
+
+    public void setBilledToInsurer(Double billedToInsurer) {
+        this.billedToInsurer = billedToInsurer;
     }
     public MedicalOrderEntity getOrder() {
         return order;

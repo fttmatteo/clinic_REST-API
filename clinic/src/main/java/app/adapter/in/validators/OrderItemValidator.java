@@ -24,10 +24,31 @@ public class OrderItemValidator extends SimpleValidator {
 
     public OrderItemType typeValidator(String value) throws InputsException {
         stringValidator("tipo de ítem", value);
-        try {
-            return OrderItemType.valueOf(value.toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new InputsException("el tipo de ítem debe ser MEDICINE, PROCEDURE o DIAGNOSTIC_AID");
+
+        String norm = java.text.Normalizer.normalize(value.trim().toLowerCase(), java.text.Normalizer.Form.NFD)
+                .replaceAll("\\p{InCombiningDiacriticalMarks}+", "")
+                .replaceAll("[\\s-]+", "_");
+
+        switch (norm) {
+            case "medicamento":
+            case "medicamentos":
+                return OrderItemType.MEDICINE;
+
+            case "procedimiento":
+            case "procedimientos":
+                return OrderItemType.PROCEDURE;
+
+            case "ayuda_diagnostica":
+            case "diagnostico":
+            case "diagnosticos":
+                return OrderItemType.DIAGNOSTIC_AID;
+
+            default:
+                try {
+                    return OrderItemType.valueOf(value.trim().toUpperCase());
+                } catch (IllegalArgumentException e) {
+                    throw new InputsException("el tipo de ítem debe ser medicamento, procedimiento o ayuda diagnóstica.");
+                }
         }
     }
 
