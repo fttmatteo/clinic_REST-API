@@ -17,6 +17,8 @@ public class Invoice {
     private double productAmount;
     private Date date;
     private boolean medicine;
+    private double copay;
+    private double billedToInsurer;
 
     public Long getId() {
         return id;
@@ -80,5 +82,21 @@ public class Invoice {
 
     public void setMedicine(boolean medicine) {
         this.medicine = medicine;
+    }
+
+    public double getCopay() {
+        return copay;
+    }
+
+    public void setCopay(double copay) {
+        this.copay = copay;
+    }
+
+    public double getBilledToInsurer() {
+        return billedToInsurer;
+    }
+
+    public void setBilledToInsurer(double billedToInsurer) {
+        this.billedToInsurer = billedToInsurer;
     }
 }
