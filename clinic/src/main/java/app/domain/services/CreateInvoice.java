@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import app.application.exceptions.BusinessException;
 import app.domain.model.Employee;
 import app.domain.model.Invoice;
+import app.domain.model.InsurancePolicy;
 import app.domain.model.MedicalOrder;
 import app.domain.model.Patient;
 import app.domain.model.enums.Role;
@@ -59,6 +60,38 @@ public class CreateInvoice {
         }
         invoice.setPatient(patient);
         invoice.setDate(new Date(System.currentTimeMillis()));
+
+        double copay;
+        double billedToInsurer;
+        InsurancePolicy policy = patient.getInsurancePolicy();
+        boolean hasActivePolicy = false;
+        if (policy != null && policy.isActive()) {
+            Date today = new Date(System.currentTimeMillis());
+            if (policy.getExpiryDate() == null || !policy.getExpiryDate().before(today)) {
+                hasActivePolicy = true;
+            }
+        }
+        if (hasActivePolicy) {
+            int currentYear = Integer.parseInt(new java.text.SimpleDateFormat("yyyy").format(new java.util.Date()));
+            double totalCopayYear = invoicePort.sumCopayByPatientAndYear(patient, currentYear);
+            if (totalCopayYear >= 1000000) {
+                copay = 0;
+            } else {
+                copay = 50000;
+                if (totalCopayYear + copay > 1000000) {
+                    copay = 0;
+                }
+            }
+            billedToInsurer = invoice.getProductAmount() - copay;
+            if (billedToInsurer < 0) {
+                billedToInsurer = 0;
+            }
+        } else {
+            copay = invoice.getProductAmount();
+            billedToInsurer = 0;
+        }
+        invoice.setCopay(copay);
+        invoice.setBilledToInsurer(billedToInsurer);
         invoicePort.save(invoice);
     }
 }

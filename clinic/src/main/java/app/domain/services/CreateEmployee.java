@@ -19,9 +19,16 @@ public class CreateEmployee {
     @Autowired
     private EmployeePort employeePort;
 
+    @Autowired
+    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
+
     public void create(Employee employee) throws Exception {
         documentIsUnique(employee.getDocument());
         userNameIsUnique(employee.getUserName());
+        if (employee.getPassword() != null) {
+            String encoded = passwordEncoder.encode(employee.getPassword());
+            employee.setPassword(encoded);
+        }
         employeePort.save(employee);
     }
 

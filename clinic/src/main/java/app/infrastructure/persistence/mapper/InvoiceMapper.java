@@ -32,6 +32,8 @@ public class InvoiceMapper {
         entity.setProductName(invoice.getProductName());
         entity.setProductAmount(invoice.getProductAmount());
         entity.setMedicine(invoice.isMedicine());
+        entity.setCopay(invoice.getCopay());
+        entity.setBilledToInsurer(invoice.getBilledToInsurer());
         if (invoice.getOrder() != null) {
             MedicalOrderEntity orderEntity = new MedicalOrderEntity();
             orderEntity.setId(invoice.getOrder().getId());
@@ -58,6 +60,8 @@ public class InvoiceMapper {
         invoice.setProductName(entity.getProductName());
         invoice.setProductAmount(entity.getProductAmount());
         invoice.setMedicine(entity.getMedicine());
+        invoice.setCopay(entity.getCopay());
+        invoice.setBilledToInsurer(entity.getBilledToInsurer());
         if (entity.getOrder() != null) {
             MedicalOrder order = new MedicalOrder();
             order.setId(entity.getOrder().getId());
