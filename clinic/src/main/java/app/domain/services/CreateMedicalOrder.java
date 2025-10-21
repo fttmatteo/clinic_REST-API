@@ -1,6 +1,5 @@
 package app.domain.services;
 
-import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,11 +49,7 @@ public class CreateMedicalOrder {
         if (patient == null) {
             throw new BusinessException("La orden debe asociarse a un paciente registrado");
         }
-        if (order.getId() != null) {
-            if (orderPort.findById(order) != null) {
-                throw new BusinessException("Ya existe una orden con ese identificador");
-            }
-        }
+        order.setId(null);
         boolean hasDiagnosticAid = false;
         Set<Integer> usedItemNumbers = new HashSet<>();
         Set<String> usedItemTypeAndId = new HashSet<>();
@@ -123,7 +118,6 @@ public class CreateMedicalOrder {
         }
         order.setDoctor(doctor);
         order.setPatient(patient);
-        order.setCreationDate(new Date(System.currentTimeMillis()));
         orderPort.save(order);
     }
 }
