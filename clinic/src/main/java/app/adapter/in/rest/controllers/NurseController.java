@@ -3,6 +3,7 @@ package app.adapter.in.rest.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import app.domain.model.VitalSignsRecord;
  */
 @RestController
 @RequestMapping("/nurse")
+@PreAuthorize("hasRole('NURSE')")
 public class NurseController {
 
     @Autowired
@@ -29,6 +31,7 @@ public class NurseController {
     private NurseUseCase nurseUseCase;
 
     @PostMapping("/vital-signs")
+        @PreAuthorize("hasRole('NURSE')")
     public ResponseEntity<?> recordVitalSigns(@RequestBody VitalSignsRequest request) {
         try {
             VitalSignsRecord record = vitalSignsBuilder.build(
