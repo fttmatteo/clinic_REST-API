@@ -3,6 +3,7 @@ package app.adapter.in.rest.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import app.domain.model.Employee;
  */
 @RestController
 @RequestMapping("/employees")
+@PreAuthorize("hasRole('HUMAN_RESOURCES')")
 public class HumanResourcesController {
 
     @Autowired
@@ -30,6 +32,7 @@ public class HumanResourcesController {
     private HumanResourcesUseCase humanResourcesUseCase;
 
     @PostMapping("/doctor")
+        @PreAuthorize("hasRole('HUMAN_RESOURCES')")
     public ResponseEntity<?> createDoctor(@RequestBody EmployeeRequest request) {
         try {
             Employee employee = employeeBuilder.build(
@@ -54,6 +57,7 @@ public class HumanResourcesController {
     }
 
     @PostMapping("/nurse")
+        @PreAuthorize("hasRole('HUMAN_RESOURCES')")
     public ResponseEntity<?> createNurse(@RequestBody EmployeeRequest request) {
         try {
             Employee employee = employeeBuilder.build(
@@ -78,6 +82,7 @@ public class HumanResourcesController {
     }
 
     @PostMapping("/administrative")
+        @PreAuthorize("hasRole('HUMAN_RESOURCES')")
     public ResponseEntity<?> createAdministrative(@RequestBody EmployeeRequest request) {
         try {
             Employee employee = employeeBuilder.build(
@@ -102,6 +107,7 @@ public class HumanResourcesController {
     }
 
     @PostMapping("/information-support")
+        @PreAuthorize("hasRole('HUMAN_RESOURCES')")
     public ResponseEntity<?> createInformationSupport(@RequestBody EmployeeRequest request) {
         try {
             Employee employee = employeeBuilder.build(
