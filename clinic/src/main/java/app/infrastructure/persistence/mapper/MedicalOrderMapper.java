@@ -23,6 +23,8 @@ public class MedicalOrderMapper {
         if (order == null) return null;
         MedicalOrderEntity entity = new MedicalOrderEntity();
         entity.setId(order.getId());
+        // Map order number assigned by the system
+        entity.setOrderNumber(order.getOrderNumber());
         if (order.getPatient() != null) {
             PatientEntity patientEntity = new PatientEntity();
             patientEntity.setId(order.getPatient().getId());
@@ -50,6 +52,8 @@ public class MedicalOrderMapper {
         if (entity == null) return null;
         MedicalOrder order = new MedicalOrder();
         order.setId(entity.getId());
+        // Map order number from persistence to domain
+        order.setOrderNumber(entity.getOrderNumber());
         if (entity.getPatient() != null) {
             Patient patient = new Patient();
             patient.setId(entity.getPatient().getId());

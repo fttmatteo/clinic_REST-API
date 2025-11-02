@@ -83,6 +83,15 @@ public class CreateMedicalOrder {
             throw new BusinessException("La orden debe asociarse a un paciente registrado");
         }
         order.setId(null);
+
+        if (order.getOrderNumber() == null || order.getOrderNumber().isEmpty()) {
+            String newOrderNumber;
+            do {
+                int num = (int) (Math.random() * 1_000_000);
+                newOrderNumber = String.format("%06d", num);
+            } while (orderPort.findByOrderNumber(newOrderNumber) != null);
+            order.setOrderNumber(newOrderNumber);
+        }
         boolean hasDiagnosticAid = false;
         Set<Integer> usedItemNumbers = new HashSet<>();
         Set<String> usedItemTypeAndId = new HashSet<>();
