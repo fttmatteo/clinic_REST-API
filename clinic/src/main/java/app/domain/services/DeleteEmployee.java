@@ -19,13 +19,6 @@ public class DeleteEmployee {
     @Autowired
     private EmployeePort employeePort;
 
-    /**
-     * Elimina un empleado por su número de documento.
-     *
-     * @param document número de documento del empleado a eliminar
-     * @throws Exception si ocurre un error inesperado o una restricción de
-     *                   integridad impide la eliminación
-     */
     public void deleteByDocument(long document) throws Exception {
         try {
             employeePort.deleteByDocument(document);

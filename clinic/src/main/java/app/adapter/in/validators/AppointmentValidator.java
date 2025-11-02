@@ -27,7 +27,6 @@ public class AppointmentValidator extends SimpleValidator {
 
     public Timestamp dateTimeValidator(String value) throws InputsException {
         stringValidator("fecha y hora de la cita", value);
-        // Acepta formato ISO 8601 con o sin zona y con espacio o 'T'
         String normalized = value.trim().replace('T', ' ');
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         try {
