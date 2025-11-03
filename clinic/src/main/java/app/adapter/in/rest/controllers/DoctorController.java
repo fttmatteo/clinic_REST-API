@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +36,7 @@ import app.domain.model.Patient;
  */
 @RestController
 @RequestMapping("/doctor")
+@PreAuthorize("hasRole('DOCTOR')")
 public class DoctorController {
 
     @Autowired
@@ -49,22 +51,17 @@ public class DoctorController {
     private DoctorUseCase doctorUseCase;
 
     @PostMapping("/orders")
+        @PreAuthorize("hasRole('DOCTOR')")
     public ResponseEntity<?> createOrder(@RequestBody MedicalOrderRequest request) {
         try {
             List<OrderItem> items = new ArrayList<>();
             if (request.getItems() != null) {
+                int nextItemNumber = 1;
                 for (OrderItemRequest itemReq : request.getItems()) {
                     OrderItem item = orderItemBuilder.build(
-                            itemReq.getItemNumber(),
                             itemReq.getType(),
-                            itemReq.getName(),
-                            itemReq.getDose(),
-                            itemReq.getTreatmentDuration(),
-                            itemReq.getQuantity(),
-                            itemReq.getFrequency(),
-                            itemReq.getCost(),
-                            itemReq.getRequiresSpecialist(),
-                            itemReq.getSpecialistTypeId()
+                            itemReq.getReferenceId(),
+                            nextItemNumber++
                     );
                     items.add(item);
                 }
@@ -86,6 +83,7 @@ public class DoctorController {
     }
 
     @PostMapping("/records")
+        @PreAuthorize("hasRole('DOCTOR')")
     public ResponseEntity<?> createRecord(@RequestBody MedicalRecordRequest request) {
         try {
             MedicalRecord record = medicalRecordBuilder.build(
@@ -108,6 +106,7 @@ public class DoctorController {
     }
 
     @GetMapping("/orders/{patientId}")
+        @PreAuthorize("hasRole('DOCTOR')")
     public ResponseEntity<?> searchOrders(@PathVariable String patientId) {
         try {
             Patient patient = new Patient();

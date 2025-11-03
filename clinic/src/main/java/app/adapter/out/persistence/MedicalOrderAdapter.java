@@ -30,6 +30,7 @@ public class MedicalOrderAdapter implements MedicalOrderPort {
         MedicalOrderEntity entity = MedicalOrderMapper.toEntity(order);
         orderRepository.save(entity);
         order.setId(entity.getId());
+        order.setCreationDate(entity.getCreationDate());
     }
 
     @Override
@@ -48,5 +49,10 @@ public class MedicalOrderAdapter implements MedicalOrderPort {
             orders.add(MedicalOrderMapper.toDomain(entity));
         }
         return orders;
+    }
+    @Override
+    public MedicalOrder findByOrderNumber(String orderNumber) throws Exception {
+        Optional<MedicalOrderEntity> opt = orderRepository.findByOrderNumber(orderNumber);
+        return opt.map(MedicalOrderMapper::toDomain).orElse(null);
     }
 }

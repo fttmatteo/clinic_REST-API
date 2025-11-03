@@ -3,6 +3,9 @@ package app.adapter.in.rest.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,7 @@ import app.domain.model.Employee;
  */
 @RestController
 @RequestMapping("/employees")
+@PreAuthorize("hasRole('HUMAN_RESOURCES')")
 public class HumanResourcesController {
 
     @Autowired
@@ -29,7 +33,11 @@ public class HumanResourcesController {
     @Autowired
     private HumanResourcesUseCase humanResourcesUseCase;
 
+    @Autowired
+    private app.adapter.in.validators.EmployeeValidator employeeValidator;
+
     @PostMapping("/doctor")
+        @PreAuthorize("hasRole('HUMAN_RESOURCES')")
     public ResponseEntity<?> createDoctor(@RequestBody EmployeeRequest request) {
         try {
             Employee employee = employeeBuilder.build(
@@ -54,6 +62,7 @@ public class HumanResourcesController {
     }
 
     @PostMapping("/nurse")
+        @PreAuthorize("hasRole('HUMAN_RESOURCES')")
     public ResponseEntity<?> createNurse(@RequestBody EmployeeRequest request) {
         try {
             Employee employee = employeeBuilder.build(
@@ -78,6 +87,7 @@ public class HumanResourcesController {
     }
 
     @PostMapping("/administrative")
+        @PreAuthorize("hasRole('HUMAN_RESOURCES')")
     public ResponseEntity<?> createAdministrative(@RequestBody EmployeeRequest request) {
         try {
             Employee employee = employeeBuilder.build(
@@ -102,6 +112,7 @@ public class HumanResourcesController {
     }
 
     @PostMapping("/information-support")
+        @PreAuthorize("hasRole('HUMAN_RESOURCES')")
     public ResponseEntity<?> createInformationSupport(@RequestBody EmployeeRequest request) {
         try {
             Employee employee = employeeBuilder.build(
@@ -116,6 +127,22 @@ public class HumanResourcesController {
             );
             humanResourcesUseCase.createInformationSupport(employee);
             return ResponseEntity.status(HttpStatus.CREATED).body(employee);
+        } catch (InputsException ie) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
+        } catch (BusinessException be) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(be.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{document}")
+        @PreAuthorize("hasRole('HUMAN_RESOURCES')")
+    public ResponseEntity<?> deleteEmployee(@PathVariable String document) {
+        try {
+            long doc = employeeValidator.documentValidator(document);
+            humanResourcesUseCase.deleteEmployee(doc);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (InputsException ie) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ie.getMessage());
         } catch (BusinessException be) {
