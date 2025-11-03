@@ -1,6 +1,12 @@
-# Clínica IPS – Backend (Spring Boot)
+# Clínica – Backend (Spring Boot)
 
-Aplicación para la gestión de información de una clínica (pacientes, personal, órdenes médicas, ayudas diagnósticas, facturación, etc.), desarrollada con Java 17 y Spring Boot siguiendo Arquitectura Hexagonal (Ports & Adapters).
+Backend REST para la gestión integral de una Clinica. Cubre el ciclo completo de atención y administración: registro y consulta de pacientes, gestión de empleados (Recursos Humanos, Administrativo, Soporte de Información, Enfermería y Médicos), inventarios clínicos (medicamentos, procedimientos y ayudas diagnósticas), generación y seguimiento de órdenes médicas, y facturación con manejo de aseguradoras y copagos.
+
+El proyecto adopta Arquitectura Hexagonal (Ports & Adapters) para separar el Dominio (entidades y reglas de negocio), los Casos de uso (aplicación), los Adaptadores de entrada/salida (controladores REST, persistencia) y la Infraestructura (seguridad, configuración). Esta organización reduce acoplamientos y facilita el testeo y la evolución tecnológica.
+
+La persistencia es 100% SQL estructurado sobre MySQL 8 usando Spring Data JPA. El modelo relacional normaliza catálogos e históricos, y define relaciones clave como Orden → Ítems con numeración por orden, catálogos de Medicamentos/Procedimientos/Ayudas Diagnósticas, entidades para Pacientes y Empleados, y tablas de Facturación/Polizas para soportar copagos y tope anual.
+
+La seguridad implementa autenticación JWT y autorización por roles; los endpoints se agrupan por prefijos según el rol que exige acceso (p. ej., /employees/** para RR. HH., /doctor/** para médicos, etc.). Entre las reglas de negocio incluidas destacan: exclusividad de ayudas diagnósticas por atención (no se combinan con recetas en la misma atención), numeración secuencial de ítems por orden y cálculo de copago en función del estado de la póliza.
 
 ---
 
