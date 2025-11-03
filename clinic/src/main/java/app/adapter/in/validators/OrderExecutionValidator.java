@@ -24,11 +24,9 @@ public class OrderExecutionValidator extends SimpleValidator {
     }
 
     public String notesValidator(String value) throws InputsException {
-        // Las notas son opcionales; aceptar nulo o vacío
         if (value == null || value.trim().isEmpty()) {
             return null;
         }
-        // Validar longitud máxima
         if (value.length() > 1024) {
             throw new InputsException("las observaciones no pueden exceder 1024 caracteres");
         }

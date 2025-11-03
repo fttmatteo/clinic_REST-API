@@ -14,10 +14,6 @@ public class OrderExecutionRecord {
     private OrderItem orderItem;
     private Employee nurse;
     private Timestamp dateTime;
-    /**
-     * Cantidad aplicada o realizada. Para medicamentos representa la dosis
-     * administrada y para procedimientos el número de veces que se realizó.
-     */
     private Double amount;
     private String notes;
 

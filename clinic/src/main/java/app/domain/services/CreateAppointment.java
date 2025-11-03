@@ -43,7 +43,11 @@ public class CreateAppointment {
         }
         appointment.setDoctor(doctor);
         List<Appointment> existing = appointmentPort.findByDoctorAndDateTime(doctor, appointment.getDateTime());
-        if (existing != null && !existing.isEmpty()) {
+        boolean hasActiveAppointment = existing != null && existing.stream()
+                .anyMatch(current -> current == null
+                        || current.getStatus() == null
+                        || !"CANCELLED".equalsIgnoreCase(current.getStatus()));
+        if (hasActiveAppointment) {
             throw new BusinessException("el médico ya tiene una cita en esa fecha y hora");
         }
         if (appointment.getStatus() == null) {

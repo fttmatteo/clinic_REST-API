@@ -14,14 +14,9 @@ import app.domain.model.Patient;
  */
 public interface AppointmentPort {
     void save(Appointment appointment) throws Exception;
-
     Appointment findById(Long id) throws Exception;
-
     List<Appointment> findByDoctorAndDateTime(Employee doctor, Timestamp dateTime) throws Exception;
-
     List<Appointment> findByPatient(Patient patient) throws Exception;
-
     List<Appointment> findByDoctor(Employee doctor) throws Exception;
-
     void delete(Appointment appointment) throws Exception;
 }
