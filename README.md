@@ -10,16 +10,33 @@ Aplicación clínica con arquitectura hexagonal. Incluye gestión de pacientes, 
 clinic/
  ├─ src/main/java/app
  │   ├─ adapter/
- │   │   ├─ in/   
- │   │   └─ out/   
- │   ├─ application/ 
- │   ├─ domain/       
+ │   │   ├─ in/
+ │   │   │   ├─ builder/
+ │   │   │   ├─ rest/
+ │   │   │   │   ├─ controllers/
+ │   │   │   │   └─ request/
+ │   │   │   └─ validators/
+ │   │   └─ out/
+ │   │       ├─ persistence/
+ │   │       └─ security/   
+ │   ├─ application/
+ │   │   ├─ exceptions/
+ │   │   └─ usecase/
+ │   ├─ domain/
+ │   │   ├─ model/
+ │   │   │   ├─ auth/
+ │   │   │   └─ enums/
+ │   │   ├─ ports/
+ │   │   └─ services/
  │   └─ infrastructure/
- │       ├─ entities 
- │       ├─ mapper   
- │       └─ repository
+ │       ├─ persistence/
+ │       │   ├─ entities 
+ │       │   ├─ mapper   
+ │       │   └─ repository
+ │       └─ security/
  └─ src/main/resources
-     └─ application.properties
+     ├─ application.properties
+     └─ data.sql
 ```
 
 ## 🧰 Prerrequisitos
