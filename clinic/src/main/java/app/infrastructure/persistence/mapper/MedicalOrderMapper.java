@@ -53,14 +53,10 @@ public class MedicalOrderMapper {
         order.setId(entity.getId());
         order.setOrderNumber(entity.getOrderNumber());
         if (entity.getPatient() != null) {
-            Patient patient = new Patient();
-            patient.setId(entity.getPatient().getId());
-            order.setPatient(patient);
+            order.setPatient(PatientMapper.toDomain(entity.getPatient()));
         }
         if (entity.getDoctor() != null) {
-            Employee doctor = new Employee();
-            doctor.setId(entity.getDoctor().getId());
-            order.setDoctor(doctor);
+            order.setDoctor(EmployeeMapper.toDomain(entity.getDoctor()));
         }
         order.setCreationDate(entity.getCreationDate());
         if (entity.getItems() != null) {
