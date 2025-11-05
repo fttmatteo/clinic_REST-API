@@ -129,11 +129,11 @@ VALUES ('direccion','1999-01-01',1000000001,'correo@dominio.com','nombre','A!123
   **POST** `/auth/login` — Iniciar sesión  
   **Body (JSON):**
   ```json
-  {{ "username": "ADMIN", "password": "A!123456789" }}
+  { "username": "ADMIN", "password": "A!123456789" }
   ```
   **Respuesta (JSON):**
   ```json
-  {{ "token": "eyJhbGciOi..." }}
+  { "token": "eyJhbGciOi..." }
   ```
 
 * Usa el token en `Authorization: Bearer <JWT>` para llamar a los endpoints.
@@ -150,7 +150,6 @@ VALUES ('direccion','1999-01-01',1000000001,'correo@dominio.com','nombre','A!123
   - `/doctor/**` → `DOCTOR`.
   - `/nurse/**` → `NURSE`.
   - `/support/**` → `INFORMATION_SUPPORT`.
-  - Resto → autenticado.
 
 ---
 
@@ -165,16 +164,16 @@ VALUES ('direccion','1999-01-01',1000000001,'correo@dominio.com','nombre','A!123
 
 **`EmployeeRequest`:**
 ```json
-{{ 
+{ 
   "fullName": "Nombre Apellido",
   "document": "1234567890",
-  "birthDate": "1990-01-01",
+  "birthDate": "01/01/1990",
   "address": "Calle 123",
   "phone": "3001234567",
   "email": "usuario@correo.com",
   "userName": "usuario",
-  "password": "secreto"
-}}
+  "password": "A!123456789"
+}
 ```
 
 ### Administración — `/administrative` (rol: PERSONAL_ADMINISTRATIVE)
@@ -189,10 +188,10 @@ VALUES ('direccion','1999-01-01',1000000001,'correo@dominio.com','nombre','A!123
 
 **`PatientRequest`:**
 ```json
-{{
+{
   "fullName":"Juan Pérez",
   "document":"100200300",
-  "birthDate":"1985-05-05",
+  "birthDate":"01/01/1990",
   "gender":"M",
   "address":"Calle 45 #10-20",
   "phone":"3001234567",
@@ -203,25 +202,25 @@ VALUES ('direccion','1999-01-01',1000000001,'correo@dominio.com','nombre','A!123
   "policyNumber":"POL-123",
   "policyStatus":"ACTIVA",
   "policyExpiry":"2026-12-31"
-}}
+}
 ```
 
 **`AppointmentRequest`:**
 ```json
-{{
+{
   "patientDocument":"100200300",
   "doctorDocument":"900100200",
-  "dateTime":"2025-11-03T09:00:00"
-}}
+  "dateTime":"2025-11-03 09:00:00"
+}
 ```
 
 **`InvoiceRequest`:**
 ```json
-{{
+{
   "patientId":"100200300",
   "doctorDocument":"900100200",
   "orderId":"ORD-001"
-}}
+}
 ```
 
 ### Médico — `/doctor` (rol: DOCTOR)
@@ -231,26 +230,26 @@ VALUES ('direccion','1999-01-01',1000000001,'correo@dominio.com','nombre','A!123
 
 **`MedicalOrderRequest`:**
 ```json
-{{
+{
   "doctorDocument":"900100200",
   "patientId":"100200300",
   "items":[
     {{ "type":"MEDICINE","referenceId":"MED-001" }},
     {{ "type":"PROCEDURE","referenceId":"PROC-001" }}
   ]
-}}
+}
 ```
 
 **`MedicalRecordRequest`:**
 ```json
-{{
+{
   "doctorDocument":"900100200",
   "patientId":"100200300",
   "orderId":"ORD-001",
   "motive":"Dolor de cabeza",
   "symptoms":"Cefalea, fiebre",
   "diagnosis":"Migraña"
-}}
+}
 ```
 
 ### Enfermería — `/nurse` (rol: NURSE)
@@ -259,14 +258,14 @@ VALUES ('direccion','1999-01-01',1000000001,'correo@dominio.com','nombre','A!123
 
 **`VitalSignsRequest`:**
 ```json
-{{
+{
   "nurseDocument":"700300400",
   "patientId":"100200300",
   "bloodPressure":"120/80",
   "temperature":"36.5",
   "pulse":"75",
   "oxygenLevel":"98"
-}}
+}
 ```
 
 ### Apoyo a la información — `/support` (rol: INFORMATION_SUPPORT)
@@ -279,36 +278,36 @@ VALUES ('direccion','1999-01-01',1000000001,'correo@dominio.com','nombre','A!123
 
 **`MedicineRequest`:**
 ```json
-{{
+{
   "id":"MED-005",
   "name":"Acetaminofén 500 mg",
   "cost":"1200.00",
   "dose":"1 tableta cada 8h",
   "treatmentDuration":"5 dias"
-}}
+}
 ```
 
 **`ProcedureRequest`:**
 ```json
-{{
+{
   "id":"PROC-001",
   "name":"Radiografía de tórax",
   "cost":"25000.00",
   "quantity":"1",
   "frequency":"ÚNICA",
   "requiresSpecialist":"false"
-}}
+}
 ```
 
 **`DiagnosticAidRequest`:**
 ```json
-{{
+{
   "id":"DA-001",
   "name":"Hemograma completo",
   "cost":"18000.00",
   "quantity":"1",
   "requiresSpecialist":"false"
-}}
+}
 ```
 
 ---
