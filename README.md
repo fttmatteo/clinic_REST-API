@@ -1,4 +1,4 @@
-#INTEGRANTES DEL PROYECTO CONSTRUCCIÓN DE SOFTWARE
+# INTEGRANTES DEL PROYECTO CONSTRUCCIÓN DE SOFTWARE
 - **Mateo Valencia Ardila**
 - **Juan Camilo Cabrera Roa**
 - **Kevin Daniel Aguirre Oquendo**
