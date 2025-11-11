@@ -1,7 +1,7 @@
 # Clínic – API REST (Spring Boot)
 
 <p align="center">
-  <img src="/clinic/images/api-endpoints.png" alt="Endpoints del API" width="700"/>
+  <img src="/clinic/images/api-endpoints.png" alt="Endpoints del API" width="500"/>
 </p>
 
 ## Integrantes del proyecto
