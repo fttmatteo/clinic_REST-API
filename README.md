@@ -658,12 +658,12 @@ VALUES ('address','1999-01-01',1000000001,'email@domain.com','name','A!123456789
 **`ProcedureRequest`:**
 ```json
 {
-"id": "PROC-001",
-"name": "Chest X-ray",
-"cost": "25000.00",
-"quantity": "1",
-"frequency": "UNIQUE",
-"requiresSpecialist": "false"
+  "id": "PROC-001",
+  "name": "Chest X-ray",
+  "cost": "25000.00",
+  "quantity": "1",
+  "frequency": "UNIQUE",
+  "requiresSpecialist": "false"
 }
 ```
 
