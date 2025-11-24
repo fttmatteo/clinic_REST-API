@@ -1,4 +1,11 @@
-{	"item": [
+{	
+	"info": {
+		"_postman_id": "f0a16ebf-3933-48dc-83a2-4ea65dcf98c9",
+		"name": "Collection Clinic API REST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49737717"
+	},
+	"item": [
 		{
 			"name": "/administrative",
 			"item": [
