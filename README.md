@@ -1,5 +1,5 @@
 ## [English version](#English)
-## [Descargar colección postman](/clinic/postman/fullCollection.json)
+## [Descargar colección postman](/clinic/postman/fullCollection.json?raw=1)
 
 ---
 ## ESPAÑOL
