@@ -14,6 +14,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * Configuración de seguridad para la aplicación. Define los filtros de
  * autenticación y las reglas de autorización basadas en roles para cada
  * uno de los recursos expuestos por los controladores REST.
+ * 
+ * NOTA: CSRF está deshabilitado porque esta es una API REST stateless que
+ * utiliza JWT para autenticación. No se utilizan cookies de sesión, por
+ * lo que la protección CSRF no es aplicable.
  */
 @Configuration
 @EnableWebSecurity
@@ -23,8 +27,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()
-            .authorizeHttpRequests()
+            // CSRF deshabilitado: API stateless con JWT (no usa cookies de sesión)
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/employees/**").hasRole("HUMAN_RESOURCES")
                 .requestMatchers("/administrative/**").hasRole("PERSONAL_ADMINISTRATIVE")
@@ -32,7 +37,7 @@ public class SecurityConfig {
                 .requestMatchers("/nurse/**").hasRole("NURSE")
                 .requestMatchers("/support/**").hasRole("INFORMATION_SUPPORT")
                 .anyRequest().authenticated()
-            .and()
+            )
             .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

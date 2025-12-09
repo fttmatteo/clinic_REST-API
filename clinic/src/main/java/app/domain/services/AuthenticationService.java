@@ -39,7 +39,13 @@ public class AuthenticationService {
         if (employee == null) {
             throw new BusinessException("Usuario no encontrado");
         }
+        
+        // Verificar contraseña
         if (!passwordEncoder.matches(credentials.getPassword(), employee.getPassword())) {
+            // NOTA: Este bloque maneja la migración de contraseñas en texto plano a BCrypt.
+            // Se utiliza solo durante la transición inicial. Considerar eliminar después
+            // de que todas las contraseñas hayan sido migradas.
+            // TODO: Agregar logging de auditoría y establecer fecha límite para eliminar este código
             if (!isPasswordEncoded(employee.getPassword())
                     && credentials.getPassword().equals(employee.getPassword())) {
                 String encoded = passwordEncoder.encode(credentials.getPassword());
