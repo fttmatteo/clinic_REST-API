@@ -18,11 +18,22 @@ import io.jsonwebtoken.security.Keys;
  * la biblioteca JJWT para generar y validar tokens JWT. Este adaptador
  * encapsula toda la lógica de firma y validación, permitiendo que la
  * lógica de dominio permanezca independiente de la tecnología utilizada.
+ * 
+ * ADVERTENCIA: La clave secreta se genera aleatoriamente en memoria en cada
+ * inicio de la aplicación. Esto significa que:
+ * - Todos los tokens JWT se invalidan al reiniciar el servidor
+ * - No es posible tener múltiples instancias del servicio (sin balanceo de carga con sesión sticky)
+ * 
+ * Para producción, se recomienda externalizar la clave secreta a application.properties:
+ * jwt.secret=${JWT_SECRET:your-base64-encoded-secret-key}
+ * 
+ * Generar clave segura: openssl rand -base64 64
  */
 @Component
 public class JwtAdapter implements AuthenticationPort {
+    // TODO: Para producción, externalizar esta clave a configuración
     private static final Key SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    private static final long EXPIRATION_TIME = 30 * 60 * 1000;
+    private static final long EXPIRATION_TIME = 30 * 60 * 1000; // 30 minutos
 
     @Override
     public TokenResponse authenticate(AuthCredentials credentials, String role) {
